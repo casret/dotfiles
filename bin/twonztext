@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+#
+# twonz is copyright (C) 1999 Vengeance Software
+# released under the terms of the GNU GPL v2.0+
+# written by Graydon Hoare <graydon@pobox.com>
+# 
+
+use Digest::SHA1;
+use MIME::Base64;
+my $context = new Digest::SHA1;
+
+$context->reset();  
+$context->add(shift);
+$context->add(shift);
+$hashval = encode_base64($context->digest());
+$hashval =~ s/\W//g;
+$hashval =~ s/(\w{8}).*/$1/g;
+
+
+print $hashval . "\n";
+
