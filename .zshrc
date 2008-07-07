@@ -168,5 +168,5 @@ eval `keychain --eval`
     function settitle { echo -ne "\e]2;[zsh]   $HOST:r:r::$PWD\a" }
 
   # This updates after each change of directory:
-    function chpwd { settab;settitle;devtodo }
+    function chpwd { settab;settitle }
 

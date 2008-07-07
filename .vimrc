@@ -59,7 +59,7 @@ map Q gq
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
-  colorscheme desert
+  colorscheme zenburn
 endif
 
 "I need to fix this
