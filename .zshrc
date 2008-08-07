@@ -6,8 +6,6 @@ umask 022
 alias mv='nocorrect mv'       # no spelling correction on mv
 alias cp='nocorrect cp'       # no spelling correction on cp
 alias mkdir='nocorrect mkdir' # no spelling correction on mkdir
-alias bzr='nocorrect bzr'   # no spelling correction on mkdir
-alias b='nocorrect bzr'
 alias g='git'
 alias vless='/usr/share/vim/vim71/macros/less.sh'
 
