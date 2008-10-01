@@ -35,6 +35,7 @@ set top
 set hidden
 set makeprg=ant
 set dir=~/tmp
+set mouse=a
 set autowrite
 runtime macros/matchit.vim
 
