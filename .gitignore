@@ -1,0 +1,6 @@
+#ignore everything except what I add by hand and bin
+*
+!bin
+!.vim*
+!.gitignore
+!.z*

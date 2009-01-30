@@ -34,11 +34,11 @@ export MANPATH=$MANPATH:/usr/lib/perl5/man:/usr/local/ssl/man
 export EDITOR=vim
 
 # less
-export LESS="-i-j1-w-R"
+export LESS="-i-j1-w-R-F-X"
 
 
 #EC2`
-export JAVA_HOME=/opt/sun-jdk-1.6.0.03
+export JAVA_HOME=/opt/sun-jdk-1.6.0.11
 export EC2_HOME=~/ec2-api-tools-1.2-11797
 PATH=$PATH:$EC2_HOME/bin
 export EC2_PRIVATE_KEY=~/.ec2/pk-KCGAPIBNJAD3WVTNZJK2TMOVI2ADZP4X.pem
