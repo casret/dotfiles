@@ -15,7 +15,7 @@
 #export X11HOME=/usr/X11R6
 #export XKEYSYMDB=/usr/X11R6/lib/X11/XKeysymDB 
 #path=($X11HOME/bin)
-path=(/usr/local /usr/local/bin /usr/bin /usr/etc /bin /sbin)
+path=(/usr/local /usr/local/bin /opt/local/bin /opt/local/sbin /usr/bin /usr/etc /bin /sbin)
 path=($path ~/bin /usr/sbin /opt/bin)
 #IRC shit
 export IRCNAME=casret
@@ -30,7 +30,7 @@ eval `dircolors ~/.dircolors`
 
 export NNTPSERVER=news.rcn.com
 
-export MANPATH=$MANPATH:/usr/lib/perl5/man:/usr/local/ssl/man
+export MANPATH=$MANPATH:/usr/lib/perl5/man:/usr/local/ssl/man:/opt/local/share/man
 export EDITOR=vim
 
 # less
