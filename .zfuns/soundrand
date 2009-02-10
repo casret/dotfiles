@@ -1,0 +1,16 @@
+#!/bin/zsh
+	if [[$# == 0]]
+	then 
+		cut -f1 /home/casret/sound/snd.index >/tmp/soundlist
+	else 
+		grep $1 /home/casret/sound/snd.index|cut -f1 > /tmp/soundlist
+	fi
+	integer z=`wc -l  < /tmp/soundlist`
+	integer x=$[RANDOM % z + 1]
+	FILE=`sed -n $[x]p /tmp/soundlist`
+	if [[$FILE = *au]]
+	then
+		play $FILE
+	else
+		wavplay $FILE
+	fi

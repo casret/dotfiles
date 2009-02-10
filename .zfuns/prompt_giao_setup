@@ -1,0 +1,56 @@
+prompt_giao_help () {
+  cat <<'EOF'
+As it's name suggests, this prompt is designed to be small and to work
+with all fonts, and yet still provide useful information.
+
+This prompt is color-scheme-able.  You can invoke it thus:
+  prompt giao [<text-color> [<punctuation-color>]]
+
+The default color is just white and is intended to work on a black
+background.  Simply use darker colors (such as black) for use on a
+lighter background.
+EOF
+}
+
+prompt_giao_setup () {
+  local host_color=${1:-'yellow'}
+  local delimiter_color=${2:-'magenta'}
+  local terminal_color=${3:-'blue'}
+  local char_color=${4:-'red'}
+  local path_color=${5:-'green'}
+  
+  local host="%{$fg_bold[$host_color]%}"
+  local delimiter="%{$fg_bold[$delimiter_color]%}"
+  local terminal="%{$fg_bold[$terminal_color]%}"
+  local char="%{$fg_bold[$char_color]%}"
+  local pathc="%{$fg_bold[$path_color]%}"
+
+  PS1="$host%2m$delimiter:$terminal%l$char%#%{$reset_color%}"
+  RPS1=" $pathc%~%{$reset_color%}"
+  #PS1="$text%n$other@$text%m$other:$text%~$other>%{$reset_color%} "
+  #PS2="$text%_$other>%{$reset_color%} "
+  #PS3="$text?$other>#%{$reset_color%} "
+  #PS4="$text+%N:%i%_$other>%{$reset_color%} "
+  #RPS1=""
+  
+  prompt_opts=( cr percent )
+  precmd () { }
+  preexec () { }
+}
+
+prompt_giao_preview () {
+  if (( ! $#* )); then
+    prompt_preview_theme giao
+    print
+    prompt_preview_theme giao green
+    print
+    prompt_preview_theme giao red yellow green blue white
+    print
+  else
+    prompt_preview_theme giao "$@"
+  fi
+}
+
+prompt_giao_setup "$@"
+
+

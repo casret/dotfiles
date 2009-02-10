@@ -29,8 +29,6 @@ alias lsd='ls -T 0 -ld *(-/)'
 # list only file beginning with "."
 alias lsa='ls -T 0 -ld .*'
 
-# where to look for autoloaded function definitions
-fpath=(~/.zfuns $fpath)
 
 
 # global aliases
@@ -43,32 +41,6 @@ alias -g 7S='/usr/local/giao/src/p4'
 
 # filename suffixes to ignore during completion
 fignore=(.o .c~ .old .pro .class .arch-ids)
-
-# Lets set up the necessary colors that we will use elsewhere.
-#grey="%{$(echo -n '\e[1;30m')%}"
-#red="%{$(echo -n '\e[1;31m')%}"
-#green="%{$(echo -n '\e[1;32m')%}"
-#yellow="%{$(echo -n '\e[1;33m')%}"
-#blue="%{$(echo -n '\e[1;34m')%}"
-#magenta="%{$(echo -n '\e[1;35m')%}"
-#cyan="%{$(echo -n '\e[1;36m')%}"
-#white="%{$(echo -n '\e[1;37m')%}"
-#black="%{$(echo -n '\e[0;30m')%}"
-#lored="%{$(echo -n '\e[0;31m')%}"
-#logreen="%{$(echo -n '\e[0;32m')%}"
-#loyellow="%{$(echo -n '\e[0;33m')%}"
-#loblue="%{$(echo -n '\e[0;34m')%}"
-#lomagenta="%{$(echo -n '\e[0;35m')%}"
-#locyan="%{$(echo -n '\e[0;36m')%}"
-#lowhite="%{$(echo -n '\e[0;37m')%}"
-#
-
-#PROMPT="%{yellow}%2m$magenta:$blue%l$red%#"
-#RPROMPT=" $green%~$white"
-
-# set prompts
-#PROMPT='%m%# '    # default prompt
-#RPROMPT=' %~'     # prompt for right side of screen
 
 MAILCHECK=300
 DIRSTACKSIZE=20
@@ -88,7 +60,6 @@ setopt   automenu
 unsetopt bgnice autoparamslash noclobber
 
 
-#PROMPT='%m:%l%#'
 stty sane
 alias ='clear'
 ff() { find / -name "$*" -print }
@@ -116,10 +87,11 @@ bindkey '[B' down-line-or-history
 bindkey '[D' backward-char
 bindkey '[C' forward-char
 
+setopt promptsubst
 autoload -U promptinit
 promptinit
 
-prompt giao
+prompt wunjo
 
 # The following lines were added by compinstall
 
