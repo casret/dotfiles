@@ -24,9 +24,12 @@ set icon
 set guioptions=alm
 set incsearch
 set showmatch
+
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set smarttab
+
 set showmode
 set smartindent
 set ignorecase
@@ -40,7 +43,13 @@ set ttymouse=xterm2
 set autowrite
 runtime macros/matchit.vim
 
+set grepprg=ack
+set grepformat=%f:%l:%m
+
 filetype plugin indent on
+
+let g:fuzzy_ignore = "*.log"
+let g:fuzzy_matching_limit = 70
 
 " Maps function keys to modes
 map #1 :h
@@ -48,7 +57,7 @@ map #2 :nohl
 map #3 :cn
 map #4 :bn
 map #5 :bd
-
+nmap <Tab> :FuzzyFinderTextMate<CR>
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -64,52 +73,6 @@ if &t_Co > 2 || has("gui_running")
   let g:zenburn_high_Contrast = 1
   colorscheme zenburn
 endif
-
-"I need to fix this
-"if has("autocmd")
-"  augroup vimrcEX
-"  au!
-"  " In text files, always limit the width of text to 78 characters
-"  "  autocmd FileType text setlocal textwidth=78
-"  " When editing a file, always jump to the last cursor position
-"  autocmd BufReadPost *
-"  \ if line("'\"") > 0 && line("'\"") <= line("$") |
-"  \   exe "normal g`\"" |
-"  \ endif
-"  augroup END
-"
-"	au BufNewFile,BufRead *.tmpl               set ft=html
-"
-" augroup cprog
-"  " Remove all cprog autocommands
-"  au!
-"
-"  " When starting to edit a file:
-"  "   For C and C++ files set formatting of comments and set C-indenting on.
-"  "   For other files switch it off.
-"  "   Don't change the order, it's important that the line with * comes first.
-"  autocmd FileType *      set formatoptions=tcql nocindent comments&
-"  autocmd FileType c,cpp  set formatoptions=croql cindent comments=sr:/*,mb:*,el:*/,://
-" augroup END
-
-" augroup javaprog
-  " Remove all javaprog autocommands
-"  au!
-  
-  " When starting to edit a file:
-  "   For C and C++ files set formatting of comments and set C-indenting on.
-  "   For other files switch it off.
-  "   Don't change the order, it's important that the line with * comes first.
-"  autocmd FileType *      set formatoptions=tcql nocindent comments&
-"  autocmd FileType java  set formatoptions=croql cindent comments=sr:/*,mb:*,el:*/,:// cino=t0,(0
-
-" augroup END
-"endif 
-
-"let g:miniBufExplMapWindowNavVim = 1
-"let g:miniBufExplMapWindowNavArrows = 1
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"let g:miniBufExplModSelTarget = 1
 
 command -bar -nargs=1 OpenURL :!firefox <args>
 
