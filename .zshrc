@@ -141,3 +141,22 @@ eval `keychain --eval`
   # This updates after each change of directory:
     function chpwd { settab;settitle }
 
+#git stuff
+alias gb="git branch"
+alias gch="git checkout"
+
+alias rbranch='git branch -r'
+
+rbnew() {
+  git push origin origin:refs/heads/$1
+  git fetch origin
+  rbch $1
+}
+
+rbch() {
+  git checkout --track -b $1 origin/$1
+}
+
+rbdel() {
+  git push origin :heads/$1
+}
