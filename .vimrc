@@ -51,6 +51,8 @@ filetype plugin indent on
 let g:fuzzy_ignore = "*.log"
 let g:fuzzy_matching_limit = 70
 
+let mapleader = ","
+
 " Maps function keys to modes
 map #1 :h
 map #2 :nohl
@@ -58,6 +60,7 @@ map #3 :cn
 map #4 :bn
 map #5 :bd
 nmap <Tab> :FuzzyFinderTextMate<CR>
+map <leader>b :FuzzyFinderBuffer<CR>
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
