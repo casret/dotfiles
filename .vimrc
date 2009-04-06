@@ -43,7 +43,7 @@ set ttymouse=xterm2
 set autowrite
 runtime macros/matchit.vim
 
-set grepprg=ack
+set grepprg=ack\ --nosql
 set grepformat=%f:%l:%m
 
 filetype plugin indent on
