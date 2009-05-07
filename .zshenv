@@ -38,7 +38,6 @@ export LESS="-i-j1-w-R-F-X"
 
 
 #EC2`
-export JAVA_HOME=/opt/sun-jdk-1.6.0.11
 export EC2_HOME=~/ec2-api-tools-1.2-11797
 PATH=$PATH:$EC2_HOME/bin
 export EC2_PRIVATE_KEY=~/.ec2/pk-KCGAPIBNJAD3WVTNZJK2TMOVI2ADZP4X.pem
@@ -46,3 +45,6 @@ export EC2_CERT=~/.ec2/cert-KCGAPIBNJAD3WVTNZJK2TMOVI2ADZP4X.pem
 # where to look for autoloaded function definitions
 fpath=(~/.zfuns $fpath)
 typeset -U fpath
+
+#Set up local java and gems
+source ~/.zshenv-local

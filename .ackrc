@@ -1,3 +1,4 @@
 --smart-case
 --ignore-dir=vendor
 --type-set=haml=.haml
+--pager=less
