@@ -86,6 +86,7 @@ bindkey '[A' up-line-or-history
 bindkey '[B' down-line-or-history
 bindkey '[D' backward-char
 bindkey '[C' forward-char
+bindkey '' history-incremental-search-backward
 
 setopt promptsubst
 autoload -U promptinit
