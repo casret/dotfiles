@@ -46,3 +46,6 @@ export EC2_CERT=~/.ec2/cert-KCGAPIBNJAD3WVTNZJK2TMOVI2ADZP4X.pem
 # where to look for autoloaded function definitions
 fpath=(~/.zfuns $fpath)
 typeset -U fpath
+
+#Set up local java and gems
+source ~/.zshenv-local
