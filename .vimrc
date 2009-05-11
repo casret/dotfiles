@@ -36,7 +36,7 @@ set ignorecase
 set smartcase
 set top
 set hidden
-set makeprg=ant
+set makeprg=rake
 set dir=~/tmp
 set mouse=a
 set ttymouse=xterm2
