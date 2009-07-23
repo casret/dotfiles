@@ -41,6 +41,7 @@ set dir=~/tmp
 set mouse=a
 set ttymouse=xterm2
 set autowrite
+set wildmode=longest:full,list
 runtime macros/matchit.vim
 
 set grepprg=ack\ --nosql
@@ -48,7 +49,7 @@ set grepformat=%f:%l:%m
 
 filetype plugin indent on
 
-let g:fuzzy_ignore = "*.log"
+let g:fuzzy_ignore = "*.log,*.class"
 let g:fuzzy_matching_limit = 70
 
 let mapleader = ","
@@ -97,3 +98,6 @@ nmap <silent> <C-Right> :wincmd l<CR>
 "let g:Tb_UseSingleClick = 1
 "let g:Tb_ModSelTarget = 1
 "let g:Tb_TabWrap = 1
+
+:highlight RedundantSpaces ctermbg=red guibg=red
+:match RedundantSpaces /\s\+$\| \+\ze\t/

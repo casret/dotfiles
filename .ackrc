@@ -1,4 +1,5 @@
 --smart-case
 --ignore-dir=vendor
 --type-set=haml=.haml
+--type-set=scala=.scala
 --pager=less
