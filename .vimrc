@@ -50,7 +50,7 @@ set grepformat=%f:%l:%m
 filetype plugin indent on
 
 let g:fuzzy_ignore = "*.log,*.class"
-let g:fuzzy_matching_limit = 70
+"let g:fuzzy_matching_limit = 70
 
 let mapleader = ","
 
@@ -62,6 +62,7 @@ map #4 :bn
 map #5 :bd
 nmap <Tab> :FuzzyFinderTextMate<CR>
 map <leader>b :FuzzyFinderBuffer<CR>
+map <leader>r :FuzzyFinderTextMateRefreshFiles<CR>
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
