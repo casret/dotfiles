@@ -50,4 +50,4 @@ defbce "on"
 term screen-256color
 #termcapinfo xterm|xterms|xs|rxvt ti@:te@
 
-
+shell $SHELL
