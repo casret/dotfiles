@@ -8,6 +8,7 @@ alias cp='nocorrect cp'       # no spelling correction on cp
 alias mkdir='nocorrect mkdir' # no spelling correction on mkdir
 alias g='git'
 alias gd='git diff --no-prefix'
+alias gdc='git diff --no-prefix --cached'
 alias gst='git status'
 alias vless='/usr/share/vim/vim71/macros/less.sh'
 

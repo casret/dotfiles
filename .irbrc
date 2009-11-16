@@ -3,7 +3,8 @@ require 'irb/ext/save-history'
 require 'ostruct'
 ARGV.concat [ "--readline", "--prompt-mode", "simple" ]
 IRB.conf[:SAVE_HISTORY] = 100
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
+IRB.conf[:HISTORY_NO_DUPS] = true
+#IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
 
 script_console_running = ENV.include?('RAILS_ENV') && IRB.conf[:LOAD_MODULES] && IRB.conf[:LOAD_MODULES].include?('console_with_helpers')
 rails_running = ENV.include?('RAILS_ENV') && !(IRB.conf[:LOAD_MODULES] && IRB.conf[:LOAD_MODULES].include?('console_with_helpers'))
