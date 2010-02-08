@@ -1,5 +1,6 @@
 --smart-case
 --ignore-dir=vendor
+--ignore-dir=gems
 --type-set=haml=.haml
 --type-set=scala=.scala
 --pager=less
