@@ -1,0 +1,30 @@
+#!/bin/bash
+mimetype=`xdg-mime query filetype $2` 
+name=$1
+opener=`which $name`
+
+exit_failure_operation_impossible()
+{
+    if [ $# -gt 0 ]; then
+        echo "xdg-add-handler: $@" >&2
+    fi
+
+    exit 3
+}
+
+
+if [ -z "${opener}" ] ; then
+      exit_failure_operation_impossible "no binary for name '$name'"
+fi
+
+if [ -z "${mimetype}" ] ; then
+      exit_failure_operation_impossible "no mimetype for file '$2'"
+fi
+mkdir -p ~/.local/share/applications
+echo "[Desktop Entry]
+Exec=$opener
+MimeType=$mimetype;
+Name=$name
+NoDisplay=true
+Type=Application" > ~/.local/share/applications/$name.desktop
+xdg-mime default ~/.local/share/applications/$name.desktop $mimetype
