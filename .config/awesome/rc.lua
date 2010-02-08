@@ -109,12 +109,10 @@ mymainmenu = awful.menu.new({ items = { { "awesome", myawesomemenu, beautiful.aw
 mylauncher = awful.widget.launcher({ image = image(beautiful.awesome_icon),
                                      menu = mymainmenu })
 
--- Create a systray
-mysystray = widget({ type = "systray", align = "right" })
-
 -- Create a wibox for each screen and add it
 mywibox = {}
 mypromptbox = {}
+mysystray = {}
 mylayoutbox = {}
 mytaglist = {}
 mytaglist.buttons = awful.util.table.join(
@@ -155,6 +153,7 @@ for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ align = "left" })
     -- Create an imagebox widget which will contains an icon indicating which layout we're using.
+    mysystray[s] = widget({ type = "systray", align = "right" })
     -- We need one layoutbox per screen.
     mylayoutbox[s] = widget({ type = "imagebox", align = "right" })
     mylayoutbox[s]:buttons(awful.util.table.join(
@@ -179,7 +178,7 @@ for s = 1, screen.count() do
                            mypromptbox[s],
                            mytextbox,
                            mylayoutbox[s],
-                           s == 1 and mysystray or nil }
+                           mysystray[s] }
     mywibox[s].screen = s
 end
 -- }}}
