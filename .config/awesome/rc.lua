@@ -50,6 +50,7 @@ for s = 1, screen.count() do
     tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
 end
 -- }}}
+awful.tag.setproperty(tags[1][1], "layout", awful.layout.suit.max)
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
@@ -116,18 +117,20 @@ mytasklist.buttons = awful.util.table.join(
 
 
 -- Initialize widget
--- cpuwidget = awful.widget.graph()
+cpuwidget1 = awful.widget.graph()
+cpuwidget2 = awful.widget.graph()
 -- Graph properties
--- cpuwidget:set_width(50)
--- cpuwidget:set_background_color("#494B4F")
--- cpuwidget:set_color("#FF5656")
--- cpuwidget:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+cpuwidget1:set_width(50)
+cpuwidget2:set_width(50)
+cpuwidget1:set_background_color("#494B4F")
+cpuwidget2:set_background_color("#494B4F")
+cpuwidget1:set_color("#FF5656")
+cpuwidget2:set_color("#FF5656")
+cpuwidget1:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+cpuwidget2:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
 -- Register widget
--- vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
-
--- datewidget = widget({ type = 'textbox' })
--- vicious.register(datewidget, vicious.widgets.date, '%b %d, %R')
-
+vicious.register(cpuwidget1, vicious.widgets.cpu, "$2")
+vicious.register(cpuwidget2, vicious.widgets.cpu, "$3")
 
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
@@ -159,9 +162,11 @@ for s = 1, screen.count() do
             mypromptbox[s],
             layout = awful.widget.layout.horizontal.leftright
         },
+        mysystray[s],
         mylayoutbox[s],
         mytextclock,
-        mysystray[s],
+        s==1 and cpuwidget2.widget or nil,
+        s==1 and cpuwidget1.widget or nil,
         mytasklist[s],
         layout = awful.widget.layout.horizontal.rightleft
     }
