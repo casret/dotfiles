@@ -12,7 +12,7 @@ alias gdc='git diff --no-prefix --cached'
 alias gst='git status'
 alias vless='/usr/share/vim/vim71/macros/less.sh'
 
-alias j=jobs
+#alias j=jobs
 alias pu=pushd
 alias po=popd
 alias d='dirs -v'
@@ -165,4 +165,6 @@ rbch() {
 rbdel() {
   git push origin :heads/$1
 }
+
+. ~/.zsh/autojump.zsh
 
