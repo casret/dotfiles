@@ -13,3 +13,5 @@
 !.z*
 !.zfuns/*
 !.ackrc
+.zshenv-local
+.zcompdump

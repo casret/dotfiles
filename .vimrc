@@ -49,7 +49,7 @@ set grepformat=%f:%l:%m
 
 filetype plugin indent on
 
-let g:fuzzy_ignore = "*.log,*.class"
+let g:fuzzy_ignore = "*.log,*.class,gems/gems/**"
 "let g:fuzzy_matching_limit = 70
 
 let mapleader = ","

@@ -12,7 +12,7 @@ alias gdc='git diff --no-prefix --cached'
 alias gst='git status'
 alias vless='/usr/share/vim/vim71/macros/less.sh'
 
-alias j=jobs
+#alias j=jobs
 alias pu=pushd
 alias po=popd
 alias d='dirs -v'
@@ -24,6 +24,7 @@ alias la='ls -a'
 alias cvs='cvs -q'
 alias nsi='netstat -A inet'
 alias vless='/usr/share/vim/vim71/macros/less.sh'
+alias class='export CLASSPATH=`buildr -s reporting:scala:classpath`'
 
 # list only directories and symbolic
 # links that point to directories
@@ -35,11 +36,11 @@ alias lsa='ls -T 0 -ld .*'
 
 
 # global aliases
-alias -g G='| grep' 
+alias -g G='| grep'
 alias -g M='| less'
 alias -g H='| head'
 alias -g T='| tail'
-alias -g 7S='/usr/local/giao/src/p4'
+alias -g jj="| ruby -r rubygems -e 'require \"json\"; jj JSON.parse gets'"
 
 
 # filename suffixes to ignore during completion
@@ -165,5 +166,6 @@ rbdel() {
   git push origin :heads/$1
 }
 
+. ~/.zsh/autojump.zsh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
