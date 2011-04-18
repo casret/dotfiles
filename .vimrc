@@ -60,6 +60,7 @@ map #2 :nohl
 map #3 :cn
 map #4 :bn
 map #5 :bd
+call togglebg#map("<F6>")
 nmap <Tab> :FuzzyFinderTextMate<CR>
 map <leader>b :FuzzyFinderBuffer<CR>
 map <leader>r :FuzzyFinderTextMateRefreshFiles<CR>
@@ -75,8 +76,9 @@ map Q gq
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
-  let g:zenburn_high_Contrast = 1
-  colorscheme zenburn
+"  let g:zenburn_high_Contrast = 1
+  set background=light
+  colorscheme solarized
 endif
 
 command -bar -nargs=1 OpenURL :!firefox <args>

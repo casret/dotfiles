@@ -169,3 +169,6 @@ rbdel() {
 . ~/.zsh/autojump.zsh
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+wiki() {
+  dig +short txt $1.wp.dg.cx
+}
