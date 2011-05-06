@@ -11,6 +11,7 @@
 ": set term=xterm
 ":endif
 
+call pathogen#runtime_append_all_bundles()
 set nocompatible	" Use Vim defaults (much better!)
 set bs=2		" allow backspacing over everything in insert mode
 " set backup		" keep a backup file
@@ -59,8 +60,8 @@ map #1 :h
 map #2 :nohl
 map #3 :cn
 map #4 :bn
-map #5 :bd
-call togglebg#map("<F6>")
+"map #5 :bd
+"call togglebg#map("<F5>")
 nmap <Tab> :FuzzyFinderTextMate<CR>
 map <leader>b :FuzzyFinderBuffer<CR>
 map <leader>r :FuzzyFinderTextMateRefreshFiles<CR>
