@@ -1,11 +1,21 @@
-require 'irb/completion'
-require 'irb/ext/save-history'
-require 'ostruct'
-ARGV.concat [ "--readline", "--prompt-mode", "simple" ]
-IRB.conf[:SAVE_HISTORY] = 100
-IRB.conf[:HISTORY_NO_DUPS] = true
-#IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
-#
+begin
+  # load wirble
+  require 'rubygems'
+  require 'wirble'
+
+  # start wirble (with color)
+  Wirble.init
+  Wirble.colorize
+rescue LoadError => err
+  warn "Couldn't load Wirble: #{err}"
+  require 'irb/completion'
+  require 'irb/ext/save-history'
+  ARGV.concat [ "--readline", "--prompt-mode", "simple" ]
+  IRB.conf[:SAVE_HISTORY] = 100
+  IRB.conf[:HISTORY_NO_DUPS] = true
+  #IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
+end
+
 Thread.current['ums_ticket'] = 'giao@brightroll.com=user:admin'
 Thread.current['ums_user'] = 'giao@brightroll.com'
 
