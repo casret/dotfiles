@@ -24,7 +24,7 @@ alias la='ls -a'
 alias cvs='cvs -q'
 alias nsi='netstat -A inet'
 alias vless='/usr/share/vim/vim71/macros/less.sh'
-alias class='export CLASSPATH=`buildr -s reporting:scala:classpath`'
+alias class='export CLASSPATH=`bin/buildr -s reporting:scala:classpath`'
 
 # list only directories and symbolic
 # links that point to directories
@@ -166,8 +166,9 @@ rbdel() {
   git push origin :heads/$1
 }
 
-. ~/.zsh/autojump.zsh
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+#. ~/.zsh/autojump.zsh
+. ~/.zsh/f.sh
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 wiki() {
   dig +short txt $1.wp.dg.cx
