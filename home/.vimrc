@@ -50,7 +50,7 @@ set grepformat=%f:%l:%m
 
 filetype plugin indent on
 
-let g:fuzzy_ignore = "*.log,*.class,gems/gems/**"
+"let g:fuzzy_ignore = "*.log,*.class,gems/gems/**"
 "let g:fuzzy_matching_limit = 70
 
 let mapleader = ","
@@ -62,9 +62,9 @@ map #3 :cn
 map #4 :bn
 "map #5 :bd
 "call togglebg#map("<F5>")
-nmap <Tab> :FuzzyFinderTextMate<CR>
-map <leader>b :FuzzyFinderBuffer<CR>
-map <leader>r :FuzzyFinderTextMateRefreshFiles<CR>
+"nmap <Tab> :FuzzyFinderTextMate<CR>
+"map <leader>b :FuzzyFinderBuffer<CR>
+"map <leader>r :FuzzyFinderTextMateRefreshFiles<CR>
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -105,3 +105,6 @@ nmap <silent> <C-Right> :wincmd l<CR>
 
 :highlight RedundantSpaces ctermbg=red guibg=red
 :match RedundantSpaces /\s\+$\| \+\ze\t/
+
+let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
+set laststatus=2
