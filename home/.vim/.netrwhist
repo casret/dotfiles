@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/Users/giaophan/git/rq_client/lib/rq_client'
+let g:netrw_dirhist_2='/Users/giaophan/git/rq_client/lib'
+let g:netrw_dirhist_3='/Users/giaophan/git/reporting/config/resources'
+let g:netrw_dirhist_4='/Users/giaophan/git/reporting/config/resources/environments'
