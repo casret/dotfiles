@@ -167,9 +167,12 @@ rbdel() {
 }
 
 #. ~/.zsh/autojump.zsh
-. ~/.zsh/f.sh
+#. ~/.zsh/f.sh
 #[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 wiki() {
   dig +short txt $1.wp.dg.cx
 }
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

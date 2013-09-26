@@ -45,8 +45,8 @@ set autowrite
 set wildmode=longest:full,list
 runtime macros/matchit.vim
 
-set grepprg=ack\ --nosql
-set grepformat=%f:%l:%m
+" set grepprg=ack\ --nosql
+" set grepformat=%f:%l:%m
 
 filetype plugin indent on
 
@@ -107,4 +107,5 @@ nmap <silent> <C-Right> :wincmd l<CR>
 :match RedundantSpaces /\s\+$\| \+\ze\t/
 
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
+let g:ctrlp_map = '<Tab>'
 set laststatus=2

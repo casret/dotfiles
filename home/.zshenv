@@ -15,8 +15,8 @@
 #export X11HOME=/usr/X11R6
 #export XKEYSYMDB=/usr/X11R6/lib/X11/XKeysymDB 
 #path=($X11HOME/bin)
-path=(/usr/local /usr/local/bin /opt/local/bin /opt/local/sbin /usr/bin /usr/etc /bin /sbin)
-path=($path ~/bin /usr/sbin /opt/bin)
+path=(~/bin /usr/local /usr/local/bin /opt/local/bin /opt/local/sbin /usr/bin /usr/etc /bin /sbin)
+path=($path /usr/sbin /opt/bin)
 path=($path ~/.sprouts/cache/0.7/sprout-flex3sdk-tool-3.3.0/archive/bin)
 #IRC shit
 export IRCNAME=casret
