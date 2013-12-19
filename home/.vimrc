@@ -108,4 +108,5 @@ nmap <silent> <C-Right> :wincmd l<CR>
 
 let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files']
 let g:ctrlp_map = '<Tab>'
+let g:ctrlp_by_filename = 1
 set laststatus=2
