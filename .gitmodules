@@ -16,3 +16,9 @@
 [submodule "home/.vim/bundle/vim-powerline"]
 	path = home/.vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "home/.vim/bundle/YouCompleteMe"]
+	path = home/.vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe
+[submodule "home/.vim/bundle/ag"]
+	path = home/.vim/bundle/ag
+	url = https://github.com/rking/ag.vim
