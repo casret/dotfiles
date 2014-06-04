@@ -1,10 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='/Users/giaophan/git/rq_client/lib/rq_client'
-let g:netrw_dirhist_2='/Users/giaophan/git/rq_client/lib'
-let g:netrw_dirhist_3='/Users/giaophan/git/reporting/config/resources'
-let g:netrw_dirhist_4='/Users/giaophan/git/reporting/config/resources/environments'
-let g:netrw_dirhist_5='/Users/giaophan/.ssh'
-let g:netrw_dirhist_6='/Users/giaophan/git/trafficker/common/src/test/scala/com/btrll'
-let g:netrw_dirhist_7='/Users/giaophan/git/trafficker/common/src/test/scala/com/btrll/dao'
-let g:netrw_dirhist_8='/Users/giaophan/git/trafficker/common/src/main/scala/com/btrll/rqclient'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/giao/br/trafficker/common/src/main/scala/com/btrll/dao'
+let g:netrw_dirhist_2='/Users/giao/br/pixeldust/node_modules'
+let g:netrw_dirhist_3='/Users/giao/br/winter/protobufs'

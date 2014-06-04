@@ -174,6 +174,8 @@ wiki() {
   dig +short txt $1.wp.dg.cx
 }
 
+ulimit -c unlimited
+
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 autoload -U any
