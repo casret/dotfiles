@@ -22,3 +22,6 @@
 [submodule "home/.vim/bundle/ag"]
 	path = home/.vim/bundle/ag
 	url = https://github.com/rking/ag.vim
+[submodule "home/.zpretzto"]
+	path = home/.zprezto
+	url = https://github.com/casret/prezto.git
