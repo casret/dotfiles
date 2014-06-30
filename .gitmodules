@@ -10,6 +10,9 @@
 [submodule ".vim/bundle/vim-ruby"]
 	path = home/.vim/bundle/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby.git
+[submodule ".vim/bundle/vim-sleuth"]
+	path = home/.vim/bundle/vim-sleuth
+	url = https://github.com/tpope/vim-sleuth.git
 [submodule "home/.vim/bundle/ctrlp.vim"]
 	path = home/.vim/bundle/ctrlp.vim
 	url = https://github.com/kien/ctrlp.vim.git
