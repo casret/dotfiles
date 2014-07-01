@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/giao/br/trafficker/common/src/main/scala/com/btrll/dao'
-let g:netrw_dirhist_2='/Users/giao/br/pixeldust/node_modules'
-let g:netrw_dirhist_3='/Users/giao/br/winter/protobufs'
