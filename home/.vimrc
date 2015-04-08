@@ -11,7 +11,7 @@
 ": set term=xterm
 ":endif
 
-call pathogen#runtime_append_all_bundles()
+execute pathogen#infect()
 set nocompatible	" Use Vim defaults (much better!)
 set bs=2		" allow backspacing over everything in insert mode
 " set backup		" keep a backup file
