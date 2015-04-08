@@ -4,27 +4,27 @@
 [submodule ".vim/bundle/vim-colors-solarized"]
 	path = home/.vim/bundle/vim-colors-solarized
 	url = git://github.com/altercation/vim-colors-solarized.git
-[submodule ".vim/bundle/vim-rails"]
-	path = home/.vim/bundle/vim-rails
-	url = https://github.com/tpope/vim-rails.git
-[submodule ".vim/bundle/vim-ruby"]
-	path = home/.vim/bundle/vim-ruby
-	url = https://github.com/vim-ruby/vim-ruby.git
 [submodule ".vim/bundle/vim-sleuth"]
 	path = home/.vim/bundle/vim-sleuth
 	url = https://github.com/tpope/vim-sleuth.git
-[submodule "home/.vim/bundle/ctrlp.vim"]
-	path = home/.vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
-[submodule "home/.vim/bundle/vim-powerline"]
-	path = home/.vim/bundle/vim-powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "home/.vim/bundle/YouCompleteMe"]
 	path = home/.vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe
-[submodule "home/.vim/bundle/ag"]
-	path = home/.vim/bundle/ag
-	url = https://github.com/rking/ag.vim
 [submodule "home/.zpretzto"]
 	path = home/.zprezto
 	url = https://github.com/casret/prezto.git
+[submodule "home/.vim/bundle/unite"]
+	path = home/.vim/bundle/unite
+	url = https://github.com/Shougo/unite.vim
+[submodule "home/.vim/bundle/neomru"]
+	path = home/.vim/bundle/neomru
+	url = https://github.com/Shougo/neomru.vim
+[submodule "home/.vim/bundle/vimproc"]
+	path = home/.vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim
+[submodule "home/.vim/bundle/unite-outline"]
+	path = home/.vim/bundle/unite-outline
+	url = https://github.com/Shougo/unite-outline
+[submodule "home/.vim/bundle/vim-airline"]
+	path = home/.vim/bundle/vim-airline
+	url = https://github.com/bling/vim-airline
