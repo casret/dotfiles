@@ -40,10 +40,15 @@ set hidden
 set makeprg=rake
 set dir=~/tmp
 set mouse=a
-set ttymouse=xterm2
+if !has('nvim')
+  set ttymouse=xterm2
+endif
 set autowrite
 set wildmode=longest:full,list
 runtime macros/matchit.vim
+set termguicolors
+
+set nofoldenable
 
 " set grepprg=ack\ --nosql
 " set grepformat=%f:%l:%m
@@ -53,7 +58,7 @@ filetype plugin indent on
 "let g:fuzzy_ignore = "*.log,*.class,gems/gems/**"
 "let g:fuzzy_matching_limit = 70
 
-let mapleader = ","
+let mapleader = " "
 
 " Maps function keys to modes
 map #1 :h
@@ -79,7 +84,7 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 "  let g:zenburn_high_Contrast = 1
   set background=light
-  colorscheme solarized
+  colorscheme NeoSolarized
 endif
 
 command -bar -nargs=1 OpenURL :!firefox <args>
@@ -140,4 +145,9 @@ if executable('pt')
   let g:unite_source_grep_encoding = 'utf-8'
 endif
 
+" pymode
+let g:pymode_folding = 0
+
+" remove trailing withspace
+autocmd FileType c,cpp,java,php,javascript,vue autocmd BufWritePre <buffer> %s/\s\+$//e
 

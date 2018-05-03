@@ -21,7 +21,8 @@ if has("gui_running")
   elseif has("x11")
     set guifont=-xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-1
   else
-    set guifont=Inconsolata:h16
+    set macligatures
+    set guifont=Fira\ Code:h16
   endif
 endif
 
