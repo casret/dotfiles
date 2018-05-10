@@ -1,3 +1,8 @@
+" Setup your python pyenvs as in https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim#using-virtual-environments
+
+let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
+
 let g:mapleader="\<Space>"
 let g:maplocalleader=';'
 
@@ -7,15 +12,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/casret/.cache/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/casret/.cache/dein')
-  call dein#begin('/Users/casret/.cache/dein')
+if dein#load_state('~/.cache/dein')
+  call dein#begin('~/.cache/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/casret/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   call dein#add('nixprime/cpsm')
