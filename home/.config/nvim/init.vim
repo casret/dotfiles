@@ -21,6 +21,7 @@ if dein#load_state('/Users/casret/.cache/dein')
   call dein#add('nixprime/cpsm')
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/neomru.vim')
+  call dein#add('chemzqm/unite-location')
 
   call dein#add('icymind/NeoSolarized')
 
@@ -141,18 +142,18 @@ if dein#tap('denite.nvim')
     call denite#custom#var('grep', 'final_opts', [])
   endif
 
-	call denite#custom#map(
-	      \ 'insert',
-	      \ '<Down>',
-	      \ '<denite:move_to_next_line>',
-	      \ 'noremap'
-	      \)
-	call denite#custom#map(
-	      \ 'insert',
-	      \ '<Up>',
-	      \ '<denite:move_to_previous_line>',
-	      \ 'noremap'
-	      \)
+  call denite#custom#map(
+        \ 'insert',
+        \ '<Down>',
+        \ '<denite:move_to_next_line>',
+        \ 'noremap'
+        \)
+  call denite#custom#map(
+        \ 'insert',
+        \ '<Up>',
+        \ '<denite:move_to_previous_line>',
+        \ 'noremap'
+        \)
 
   nnoremap <silent><leader>t :<C-u>Denite
         \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
@@ -163,10 +164,20 @@ if dein#tap('denite.nvim')
   nnoremap <silent><leader>vt :<C-u>Denite -default-action=vsplit
         \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 
+  nnoremap <silent><leader>g :<C-u>Denite grep<CR>
+
   if dein#tap('neomru.vim')
     nnoremap <silent><leader>r :<C-u>Denite -buffer-name=files file_mru<CR>
     nnoremap <silent><leader>sr :<C-u>Denite -buffer-name=files -default-action=split file_mru<CR>
     nnoremap <silent><leader>vr :<C-u>Denite -buffer-name=files -default-action=vsplit file_mru<CR>
+  endif
+
+  if dein#tap('unite-location')
+    nnoremap <silent><leader>p  :<C-u>Denite -resume<CR>
+    nnoremap <silent><leader>j  :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
+    nnoremap <silent><leader>k  :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
+    nnoremap <silent><leader>q  :<C-u>Denite -mode=normal -auto-resize quickfix<CR>
+    nnoremap <silent><leader>l  :<C-u>Denite -mode=normal -auto-resize location_list<CR>
   endif
 
 endif
@@ -206,6 +217,12 @@ if dein#tap('deoplete.nvim')
         \ "\<Plug>(neosnippet_expand)" : "\<CR>"
 endif
 
+if dein#tap('ale')
+  let g:ale_linters = {
+        \   'javascript': ['eslint', 'flow'],
+        \}
+endif
+
 
 set tabstop=2
 set shiftwidth=2
@@ -221,6 +238,7 @@ map #4 :bn<cr>
 nmap <silent> <BS> :nohlsearch<CR>
 nnoremap <silent> <A-right> :bn<CR>
 nnoremap <silent> <A-left> :bp<CR>
+nnoremap Q <Nop>
 
 set termguicolors
 set nofoldenable
