@@ -28,6 +28,8 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/neomru.vim')
   call dein#add('chemzqm/unite-location')
 
+  call dein#add('sheerun/vim-polyglot')
+
   call dein#add('icymind/NeoSolarized')
 
   call dein#add('Shougo/deoplete.nvim')
@@ -256,3 +258,4 @@ set noshowmode
 set clipboard+=unnamedplus "copy and paste to the system clipboard
 
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
+let g:vim_json_syntax_conceal = 0
