@@ -49,15 +49,6 @@ if dein#load_state('~/.cache/dein')
 
   call dein#add('tpope/vim-surround')
 
-  call dein#add('vim-python/python-syntax')
-  call dein#add('Vimjas/vim-python-pep8-indent')
-
-  call dein#add('pangloss/vim-javascript')
-
-  call dein#add('digitaltoad/vim-pug')
-
-  call dein#add('posva/vim-vue')
-
   call dein#add('w0rp/ale')
 
   call dein#add('vim-airline/vim-airline')
