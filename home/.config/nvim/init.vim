@@ -6,6 +6,8 @@ let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
 let g:mapleader="\<Space>"
 let g:maplocalleader=';'
 
+set termguicolors
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -237,6 +239,8 @@ nmap <silent> <BS> :nohlsearch<CR>
 nnoremap <silent> <A-right> :bn<CR>
 nnoremap <silent> <A-left> :bp<CR>
 nnoremap Q <Nop>
+nnoremap <C-space> a
+imap <C-space> <Esc>
 
 set termguicolors
 set nofoldenable
@@ -250,3 +254,4 @@ set clipboard+=unnamedplus "copy and paste to the system clipboard
 
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:vim_json_syntax_conceal = 0
+
