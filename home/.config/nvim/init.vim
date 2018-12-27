@@ -6,6 +6,10 @@ let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
 let g:mapleader="\<Space>"
 let g:maplocalleader=';'
 
+let g:polyglot_disabled = ['jsx']
+" In case we do end up wanting jsx
+"let g:jsx_ext_required = 1
+
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -29,6 +33,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('chemzqm/unite-location')
 
   call dein#add('sheerun/vim-polyglot')
+  call dein#add('zchee/vim-flatbuffers')
 
   call dein#add('icymind/NeoSolarized')
 
@@ -44,6 +49,7 @@ if dein#load_state('~/.cache/dein')
   call dein#add('wokalski/autocomplete-flow')
 "  call dein#add('jiangmiao/auto-pairs')
 "  call dein#add('ervandew/supertab')
+  call dein#add('sebastianmarkow/deoplete-rust', { 'on_ft': 'rust'})
 
   call dein#add('tpope/vim-sleuth')
 
@@ -52,9 +58,6 @@ if dein#load_state('~/.cache/dein')
   call dein#add('w0rp/ale')
 
   call dein#add('vim-airline/vim-airline')
-
-
-
 
   " Required:
   call dein#end()
@@ -205,9 +208,9 @@ if dein#tap('deoplete.nvim')
         \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
   " For conceal markers.
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
+  "if has('conceal')
+  "  set conceallevel=2 concealcursor=niv
+  "endif
 
   " Expand the completed snippet trigger by <CR>.
   imap <expr><CR>
@@ -221,6 +224,13 @@ if dein#tap('ale')
         \}
 endif
 
+if dein#tap('deoplete-rust')
+  let g:deoplete#sources#rust#racer_binary= system('which racer')[:-2]
+  let g:deoplete#sources#rust#rust_source_path=system('rustc --print sysroot')[:-2] . '/lib/rustlib/src/rust/src'
+endif
+
+
+
 
 set tabstop=2
 set shiftwidth=2
@@ -231,6 +241,7 @@ set smartcase
 set smartindent
 set mouse=a
 map #2 :nohl<cr>
+map #3 :ALEFix<cr>
 map #4 :bn<cr>
 
 nmap <silent> <BS> :nohlsearch<CR>
@@ -250,3 +261,11 @@ set clipboard+=unnamedplus "copy and paste to the system clipboard
 
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:vim_json_syntax_conceal = 0
+
+
+nnoremap <C-space> a
+imap <C-space> <Esc>
+
+nnoremap <C-@> a
+imap <C-@> <Esc>
+
