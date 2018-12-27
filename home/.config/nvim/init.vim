@@ -9,6 +9,7 @@ let g:maplocalleader=';'
 let g:polyglot_disabled = ['jsx']
 " In case we do end up wanting jsx
 "let g:jsx_ext_required = 1
+set termguicolors
 
 "dein Scripts-----------------------------
 if &compatible
@@ -248,6 +249,8 @@ nmap <silent> <BS> :nohlsearch<CR>
 nnoremap <silent> <A-right> :bn<CR>
 nnoremap <silent> <A-left> :bp<CR>
 nnoremap Q <Nop>
+nnoremap <C-space> a
+imap <C-space> <Esc>
 
 set termguicolors
 set nofoldenable
@@ -262,10 +265,8 @@ set clipboard+=unnamedplus "copy and paste to the system clipboard
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:vim_json_syntax_conceal = 0
 
-
 nnoremap <C-space> a
 imap <C-space> <Esc>
 
 nnoremap <C-@> a
 imap <C-@> <Esc>
-
