@@ -28,10 +28,13 @@ if dein#load_state('~/.cache/dein')
   call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
-  call dein#add('nixprime/cpsm')
+  " call dein#add('nixprime/cpsm')
+  call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
   call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/neomru.vim')
   call dein#add('chemzqm/unite-location')
+
+  " call dein#add('907th/vim-auto-save')
 
   call dein#add('sheerun/vim-polyglot')
   call dein#add('zchee/vim-flatbuffers')
@@ -46,17 +49,23 @@ if dein#load_state('~/.cache/dein')
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('tweekmonster/deoplete-clang2')
-  call dein#add('zchee/deoplete-jedi')
+"  call dein#add('zchee/deoplete-jedi')
+  call dein#add('deathlyfrantic/deoplete-spell')
   call dein#add('wokalski/autocomplete-flow')
 "  call dein#add('jiangmiao/auto-pairs')
 "  call dein#add('ervandew/supertab')
-  call dein#add('sebastianmarkow/deoplete-rust', { 'on_ft': 'rust'})
+"  call dein#add('sebastianmarkow/deoplete-rust', { 'on_ft': 'rust'})
 
   call dein#add('tpope/vim-sleuth')
 
   call dein#add('tpope/vim-surround')
 
   call dein#add('w0rp/ale')
+
+  call dein#add('autozimu/LanguageClient-neovim', {
+        \ 'rev': 'next',
+        \ 'build': 'bash install.sh',
+        \ })
 
   call dein#add('vim-airline/vim-airline')
 
@@ -77,24 +86,57 @@ endif
 "End dein Scripts-------------------------
 
 if dein#tap('denite.nvim')
+  " Define mappings
+  autocmd FileType denite call s:denite_my_settings()
+  function! s:denite_my_settings() abort
+    nnoremap <silent><buffer><expr> <CR>
+          \ denite#do_map('do_action')
+    nnoremap <silent><buffer><expr> d
+          \ denite#do_map('do_action', 'delete')
+    nnoremap <silent><buffer><expr> p
+          \ denite#do_map('do_action', 'preview')
+    nnoremap <silent><buffer><expr> q
+          \ denite#do_map('quit')
+    nnoremap <silent><buffer><expr> i
+          \ denite#do_map('open_filter_buffer')
+    nnoremap <silent><buffer><expr> <Space>
+          \ denite#do_map('toggle_select').'j'
+  endfunction
+
+  autocmd FileType denite-filter call s:denite_filter_my_settings()
+	function! s:denite_filter_my_settings() abort
+	  inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+	  call deoplete#custom#buffer_option('auto_complete', v:false)
+	  imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
+	  inoremap <silent><buffer> <Down>
+	  \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+	  inoremap <silent><buffer> <Up>
+	  \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+	endfunction
+
   call denite#custom#option('_', {
+        \ 'start_filter': v:true,
         \ 'prompt': 'λ:',
-        \ 'empty': 0,
+        \ 'empty': v:false,
         \ 'source_names': 'short',
         \ 'vertical_preview': 1,
-        \ 'auto-accel': 1,
-        \ 'auto-resume': 1,
+        \ 'auto_resume': v:true,
         \ 'split': "no",
-        \ 'immediately-1': 1,
+        \ 'immediately_1': v:true,
+        \ 'statusline': v:false,
         \ })
 
-	call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+  call denite#custom#alias('source', 'file/rec/git', 'file/rec')
 
-	call denite#custom#var('file/rec/git', 'command',
+  call denite#custom#var('file/rec/git', 'command',
         \ ['git', 'ls-files', '-co', '--exclude-standard', '--cached', '--others'])
 
-	call denite#custom#source('file/rec', 'matchers', ['matcher/cpsm', 'matcher/fuzzy'])
-	call denite#custom#source('file/rec/git', 'matchers', ['matcher/cpsm', 'matcher/fuzzy'])
+
+  let g:fruzzy#usenative = 1
+  call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
+
+  call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
+  call denite#custom#source('file/rec/git', 'sorters', ['sorter/sublime'])
 
   " FIND and GREP COMMANDS
   if executable('rg')
@@ -144,18 +186,18 @@ if dein#tap('denite.nvim')
     call denite#custom#var('grep', 'final_opts', [])
   endif
 
-  call denite#custom#map(
-        \ 'insert',
-        \ '<Down>',
-        \ '<denite:move_to_next_line>',
-        \ 'noremap'
-        \)
-  call denite#custom#map(
-        \ 'insert',
-        \ '<Up>',
-        \ '<denite:move_to_previous_line>',
-        \ 'noremap'
-        \)
+"  call denite#custom#map(
+"        \ 'insert',
+"        \ '<Down>',
+"        \ '<denite:move_to_next_line>',
+"        \ 'noremap'
+"        \)
+"  call denite#custom#map(
+"        \ 'insert',
+"        \ '<Up>',
+"        \ '<denite:move_to_previous_line>',
+"        \ 'noremap'
+"        \)
 
   nnoremap <silent><leader>t :<C-u>Denite
         \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
@@ -186,6 +228,7 @@ endif
 
 if dein#tap('NeoSolarized')
   colorscheme NeoSolarized
+  set background=light
 endif
 
 if dein#tap('deoplete.nvim')
@@ -222,7 +265,14 @@ endif
 if dein#tap('ale')
   let g:ale_linters = {
         \   'javascript': ['eslint', 'flow'],
+        \   'kotlin' : ['ktlint'],
         \}
+  "kotlinc is broken for me
+  let g:ale_kotlin_kotlinc_enable_config = 1
+  let g:ale_kotlin_kotlinc_options = '-jvm-target 1.8 -d ~/tmp'
+  "let g:ale_kotlin_languageserver_executable = '/Users/casret/git/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server'
+  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
 endif
 
 if dein#tap('deoplete-rust')
@@ -261,12 +311,18 @@ set autowrite
 
 set noshowmode
 set clipboard+=unnamedplus "copy and paste to the system clipboard
+set formatoptions=tcroqj
 
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:vim_json_syntax_conceal = 0
-
 nnoremap <C-space> a
 imap <C-space> <Esc>
 
 nnoremap <C-@> a
 imap <C-@> <Esc>
+
+let g:LanguageClient_serverCommands = {
+      \ 'javascript': ['npx', 'javascript-typescript-stdio'],
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ }
+"    \ 'kotlin': ['/Users/casret/git/KotlinLanguageServer/server/build/install/server/bin/server'],
