@@ -30,31 +30,34 @@ if dein#load_state('~/.cache/dein')
   " Add or remove your plugins here:
   " call dein#add('nixprime/cpsm')
   call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
-  call dein#add('Shougo/denite.nvim')
+  " call dein#add('Shougo/denite.nvim')
   call dein#add('Shougo/neomru.vim')
-  call dein#add('chemzqm/unite-location')
+  " call dein#add('chemzqm/unite-location')
 
   " call dein#add('907th/vim-auto-save')
 
   call dein#add('sheerun/vim-polyglot')
   call dein#add('zchee/vim-flatbuffers')
 
-  call dein#add('icymind/NeoSolarized')
+"  call dein#add('icymind/NeoSolarized')
+  call dein#add('lifepillar/vim-solarized8')
 
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('Shougo/context_filetype.vim')
-  call dein#add('Shougo/neopairs.vim')
-  call dein#add('Shougo/echodoc.vim')
-  call dein#add('Shougo/neoinclude.vim')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
-  call dein#add('tweekmonster/deoplete-clang2')
+"  call dein#add('Shougo/deoplete.nvim')
+"  call dein#add('Shougo/context_filetype.vim')
+"  call dein#add('Shougo/neopairs.vim')
+"  call dein#add('Shougo/echodoc.vim')
+"  call dein#add('Shougo/neoinclude.vim')
+"  call dein#add('Shougo/neosnippet.vim')
+"  call dein#add('Shougo/neosnippet-snippets')
+"  call dein#add('tweekmonster/deoplete-clang2')
 "  call dein#add('zchee/deoplete-jedi')
-  call dein#add('deathlyfrantic/deoplete-spell')
-  call dein#add('wokalski/autocomplete-flow')
+"  call dein#add('deathlyfrantic/deoplete-spell')
+"  call dein#add('wokalski/autocomplete-flow')
 "  call dein#add('jiangmiao/auto-pairs')
 "  call dein#add('ervandew/supertab')
 "  call dein#add('sebastianmarkow/deoplete-rust', { 'on_ft': 'rust'})
+
+  call dein#add('neoclide/coc.nvim', {'rev' : 'release'})
 
   call dein#add('tpope/vim-sleuth')
 
@@ -62,12 +65,13 @@ if dein#load_state('~/.cache/dein')
 
   call dein#add('w0rp/ale')
 
-  call dein#add('autozimu/LanguageClient-neovim', {
-        \ 'rev': 'next',
-        \ 'build': 'bash install.sh',
-        \ })
+"  call dein#add('autozimu/LanguageClient-neovim', {
+"        \ 'rev': 'next',
+"        \ 'build': 'bash install.sh',
+"        \ })
 
   call dein#add('vim-airline/vim-airline')
+  call dein#add('qpkorr/vim-bufkill')
 
   " Required:
   call dein#end()
@@ -104,15 +108,15 @@ if dein#tap('denite.nvim')
   endfunction
 
   autocmd FileType denite-filter call s:denite_filter_my_settings()
-	function! s:denite_filter_my_settings() abort
-	  inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-	  call deoplete#custom#buffer_option('auto_complete', v:false)
-	  imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
-	  inoremap <silent><buffer> <Down>
-	  \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
-	  inoremap <silent><buffer> <Up>
-	  \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
-	endfunction
+  function! s:denite_filter_my_settings() abort
+    inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+    " call deoplete#custom#buffer_option('auto_complete', v:false)
+    imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
+    inoremap <silent><buffer> <Down>
+          \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+    inoremap <silent><buffer> <Up>
+          \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+  endfunction
 
   call denite#custom#option('_', {
         \ 'start_filter': v:true,
@@ -121,9 +125,10 @@ if dein#tap('denite.nvim')
         \ 'source_names': 'short',
         \ 'vertical_preview': 1,
         \ 'auto_resume': v:true,
-        \ 'split': "no",
+        \ 'split': "floating",
         \ 'immediately_1': v:true,
         \ 'statusline': v:false,
+        \ 'highlight_window_background': "Normal",
         \ })
 
   call denite#custom#alias('source', 'file/rec/git', 'file/rec')
@@ -202,33 +207,37 @@ if dein#tap('denite.nvim')
   nnoremap <silent><leader>t :<C-u>Denite
         \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 
-  nnoremap <silent><leader>st :<C-u>Denite -default-action=split
+  nnoremap <silent><leader>ts :<C-u>Denite -default-action=split
         \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 
-  nnoremap <silent><leader>vt :<C-u>Denite -default-action=vsplit
+  nnoremap <silent><leader>tv :<C-u>Denite -default-action=vsplit
         \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
 
   nnoremap <silent><leader>g :<C-u>Denite grep<CR>
 
+  nnoremap <silent><leader>b :<C-u>Denite buffer<CR>
+  nnoremap <silent><leader>bs :<C-u>Denite -default-action=split buffer<CR>
+  nnoremap <silent><leader>bv :<C-u>Denite -default-action=vsplit buffer<CR>
+
   if dein#tap('neomru.vim')
     nnoremap <silent><leader>r :<C-u>Denite -buffer-name=files file_mru<CR>
-    nnoremap <silent><leader>sr :<C-u>Denite -buffer-name=files -default-action=split file_mru<CR>
-    nnoremap <silent><leader>vr :<C-u>Denite -buffer-name=files -default-action=vsplit file_mru<CR>
+    nnoremap <silent><leader>rs :<C-u>Denite -buffer-name=files -default-action=split file_mru<CR>
+    nnoremap <silent><leader>rv :<C-u>Denite -buffer-name=files -default-action=vsplit file_mru<CR>
   endif
 
-  if dein#tap('unite-location')
-    nnoremap <silent><leader>p  :<C-u>Denite -resume<CR>
-    nnoremap <silent><leader>j  :call execute('Denite -resume -select=+'.v:count1.' -immediately')<CR>
-    nnoremap <silent><leader>k  :call execute('Denite -resume -select=-'.v:count1.' -immediately')<CR>
-    nnoremap <silent><leader>q  :<C-u>Denite -mode=normal -auto-resize quickfix<CR>
-    nnoremap <silent><leader>l  :<C-u>Denite -mode=normal -auto-resize location_list<CR>
-  endif
+  nnoremap <silent><leader>j  :<C-u>Denite -resume -cursor-pos=+1 -immediately<CR>
+  nnoremap <silent><leader>k  :<C-u>Denite -resume -cursor-pos=-1 -immediately<CR>
 
 endif
 
 if dein#tap('NeoSolarized')
   colorscheme NeoSolarized
   set background=light
+endif
+
+if dein#tap('vim-solarized8')
+  set background=light
+  colorscheme solarized8
 endif
 
 if dein#tap('deoplete.nvim')
@@ -280,6 +289,99 @@ if dein#tap('deoplete-rust')
   let g:deoplete#sources#rust#rust_source_path=system('rustc --print sysroot')[:-2] . '/lib/rustlib/src/rust/src'
 endif
 
+if dein#tap('LanguageClient-neovim')
+let g:LanguageClient_serverCommands = {
+      \ 'javascript': ['npx', 'javascript-typescript-stdio'],
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ }
+"    \ 'kotlin': ['/Users/casret/git/KotlinLanguageServer/server/build/install/server/bin/server'],
+endif
+
+if dein#tap('coc.nvim')
+" COC config
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <localleader>rn <Plug>(coc-rename)
+
+let g:airline#extensions#coc#enabled = 1
+
+set updatetime=300
+set cmdheight=2
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+  nnoremap <silent><leader>t :<C-u>CocList files<CR>
+  nnoremap <silent><leader>g :<C-u>CocList grep<CR>
+  nnoremap <silent><leader>b :<C-u>CocList buffers<CR>
+  nnoremap <silent><leader>r :<C-u>CocList mru<CR>
+
+  nnoremap <silent><leader>j  :<C-u>CocNext<CR>
+  nnoremap <silent><leader>k  :<C-u>CocPrev<CR>
+endif
+" Coc
+
 
 
 
@@ -294,13 +396,12 @@ set mouse=a
 map #2 :nohl<cr>
 map #3 :ALEFix<cr>
 map #4 :bn<cr>
+map #5 :BD<cr>
 
 nmap <silent> <BS> :nohlsearch<CR>
 nnoremap <silent> <A-right> :bn<CR>
 nnoremap <silent> <A-left> :bp<CR>
 nnoremap Q <Nop>
-nnoremap <C-space> a
-imap <C-space> <Esc>
 
 set termguicolors
 set nofoldenable
@@ -315,14 +416,11 @@ set formatoptions=tcroqj
 
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:vim_json_syntax_conceal = 0
+
 nnoremap <C-space> a
 imap <C-space> <Esc>
 
 nnoremap <C-@> a
 imap <C-@> <Esc>
 
-let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['npx', 'javascript-typescript-stdio'],
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ }
-"    \ 'kotlin': ['/Users/casret/git/KotlinLanguageServer/server/build/install/server/bin/server'],
+highlight CocListFgWhite guibg=#002b36
