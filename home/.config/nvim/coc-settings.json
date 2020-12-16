@@ -1,0 +1,22 @@
+{
+  "suggest.noselect": false,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "coc.preferences.formatOnSaveFiletypes": ["python", "ruby", "vue"],
+  "javascript.suggestionActions.enabled": false,
+  "eslint.autoFixOnSave": true,
+  "python.jediEnabled": false,
+  "solargraph.autoformat": true,
+  "solargraph.completion": true,
+  "solargraph.hover": true,
+  "list.source.grep.args": ["--vimgrep"],
+  "languageserver": {
+    "kotlin": {
+      "command": "/Users/casret/git/KotlinLanguageServer/server/build/install/server/bin/kotlin-language-server",
+      "filetypes": ["kotlin"],
+      "rootPatterns": ["build.gradle"],
+      "settings": {"kotlin":{"compiler":{"jvm":{"target":"1.8"}}}}
+    }
+  },
+	"list.source.symbols.defaultOptions": ["--interactive", "--number-select"]
+}
+

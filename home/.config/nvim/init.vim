@@ -379,7 +379,10 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
   nnoremap <silent><leader>j  :<C-u>CocNext<CR>
   nnoremap <silent><leader>k  :<C-u>CocPrev<CR>
+
+let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-tsserver', 'coc-highlight', 'coc-eslint', 'coc-vetur', 'coc-lists', 'coc-lua', 'coc-solargraph']
 endif
+highlight CocListFgWhite guibg=#002b36
 " Coc
 
 
@@ -423,4 +426,3 @@ imap <C-space> <Esc>
 nnoremap <C-@> a
 imap <C-@> <Esc>
 
-highlight CocListFgWhite guibg=#002b36
