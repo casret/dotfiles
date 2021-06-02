@@ -2,21 +2,29 @@
   "suggest.noselect": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
   "coc.preferences.formatOnSaveFiletypes": ["python", "ruby", "vue"],
+  "coc.preferences.extensionUpdateCheck": "daily",
   "javascript.suggestionActions.enabled": false,
   "eslint.autoFixOnSave": true,
   "python.jediEnabled": false,
+  "solargraph.diagnostics": true,
+  "tsserver.trace.server": "messages",
   "solargraph.autoformat": true,
+  "solargraph.formatting": false,
   "solargraph.completion": true,
   "solargraph.hover": true,
+  "list.source.grep.useLiteral": false,
   "list.source.grep.args": ["--vimgrep"],
   "languageserver": {
     "kotlin": {
-      "command": "/Users/casret/git/KotlinLanguageServer/server/build/install/server/bin/kotlin-language-server",
+      "command": "/home/casret/git/kotlin-language-server/server/build/install/server/bin/kotlin-language-server",
       "filetypes": ["kotlin"],
       "rootPatterns": ["build.gradle"],
       "settings": {"kotlin":{"compiler":{"jvm":{"target":"1.8"}}}}
     }
   },
-	"list.source.symbols.defaultOptions": ["--interactive", "--number-select"]
+  "Lua.runtime.version": "Lua 5.1",
+  "Lua.diagnostics.globals": ["ARGV", "KEYS", "redis"],
+	"list.source.symbols.defaultOptions": ["--interactive", "--number-select"],
+  "prettier.disableLanguages": []
 }
 

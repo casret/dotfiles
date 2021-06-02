@@ -29,18 +29,19 @@ if dein#load_state('~/.cache/dein')
 
   " Add or remove your plugins here:
   " call dein#add('nixprime/cpsm')
-  call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
+  " call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
   " call dein#add('Shougo/denite.nvim')
-  call dein#add('Shougo/neomru.vim')
+  " call dein#add('Shougo/neomru.vim')
   " call dein#add('chemzqm/unite-location')
 
   " call dein#add('907th/vim-auto-save')
 
   call dein#add('sheerun/vim-polyglot')
-  call dein#add('zchee/vim-flatbuffers')
+  " call dein#add('zchee/vim-flatbuffers')
 
 "  call dein#add('icymind/NeoSolarized')
   call dein#add('lifepillar/vim-solarized8')
+"  call dein#add('shaunsingh/solarized.nvim')
 
 "  call dein#add('Shougo/deoplete.nvim')
 "  call dein#add('Shougo/context_filetype.vim')
@@ -63,7 +64,9 @@ if dein#load_state('~/.cache/dein')
 
   call dein#add('tpope/vim-surround')
 
-  call dein#add('w0rp/ale')
+  call dein#add('tpope/vim-obsession')
+
+  " call dein#add('w0rp/ale')
 
 "  call dein#add('autozimu/LanguageClient-neovim', {
 "        \ 'rev': 'next',
@@ -71,13 +74,15 @@ if dein#load_state('~/.cache/dein')
 "        \ })
 
   call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
   call dein#add('qpkorr/vim-bufkill')
+  call dein#add('farmergreg/vim-lastplace')
+  call dein#add('edkolev/tmuxline.vim')
 
   " Required:
   call dein#end()
   call dein#save_state()
 endif
-
 " Required:
 filetype plugin indent on
 syntax enable
@@ -240,6 +245,11 @@ if dein#tap('vim-solarized8')
   colorscheme solarized8
 endif
 
+if dein#tap('solarized')
+  set background=light
+  colorscheme solarized
+endif
+
 if dein#tap('deoplete.nvim')
   let g:deoplete#enable_at_startup = 1
   set completeopt-=preview
@@ -341,6 +351,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <localleader>rn <Plug>(coc-rename)
 
 let g:airline#extensions#coc#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+let g:tmuxline_preset = 'nightly_fox'
 
 set updatetime=300
 set cmdheight=2
@@ -388,16 +401,16 @@ highlight CocListFgWhite guibg=#002b36
 
 
 
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set smarttab
+"set tabstop=2
+"set shiftwidth=2
+"set expandtab
+"set smarttab
 set ignorecase
 set smartcase
 set smartindent
 set mouse=a
 map #2 :nohl<cr>
-map #3 :ALEFix<cr>
+map #3 :bp<cr>
 map #4 :bn<cr>
 map #5 :BD<cr>
 
@@ -406,7 +419,7 @@ nnoremap <silent> <A-right> :bn<CR>
 nnoremap <silent> <A-left> :bp<CR>
 nnoremap Q <Nop>
 
-set termguicolors
+"set termguicolors
 set nofoldenable
 set dir=~/tmp
 set top
