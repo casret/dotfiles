@@ -78,6 +78,10 @@ if dein#load_state('~/.cache/dein')
   call dein#add('qpkorr/vim-bufkill')
   call dein#add('farmergreg/vim-lastplace')
   call dein#add('edkolev/tmuxline.vim')
+  call dein#add('github/copilot.vim')
+
+  call dein#add('tpope/vim-repeat')
+  call dein#add('ggandor/lightspeed.nvim')
 
   " Required:
   call dein#end()
@@ -439,3 +443,4 @@ imap <C-space> <Esc>
 nnoremap <C-@> a
 imap <C-@> <Esc>
 
+unmap Y
