@@ -1,358 +1,154 @@
-" Setup your python pyenvs as in https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim#using-virtual-environments
-
-let g:python3_host_prog = $HOME . '/.pyenv/versions/neovim3/bin/python'
-let g:python_host_prog = $HOME . '/.pyenv/versions/neovim2/bin/python'
-
 let g:mapleader="\<Space>"
 let g:maplocalleader=';'
-
 let g:polyglot_disabled = ['jsx']
 " In case we do end up wanting jsx
 "let g:jsx_ext_required = 1
 set termguicolors
 
-"dein Scripts-----------------------------
-if &compatible
-  set nocompatible               " Be iMproved
-endif
+lua require('plugins')
 
-" Required:
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
+set background=light
+colorscheme solarized8
 
-" Required:
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
-
-  " Let dein manage dein
-  " Required:
-  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-
-  " Add or remove your plugins here:
-  " call dein#add('nixprime/cpsm')
-  " call dein#add('raghur/fruzzy', {'hook_post_update': 'call fruzzy#install()'})
-  " call dein#add('Shougo/denite.nvim')
-  " call dein#add('Shougo/neomru.vim')
-  " call dein#add('chemzqm/unite-location')
-
-  " call dein#add('907th/vim-auto-save')
-
-  call dein#add('sheerun/vim-polyglot')
-  " call dein#add('zchee/vim-flatbuffers')
-
-"  call dein#add('icymind/NeoSolarized')
-  call dein#add('lifepillar/vim-solarized8')
-"  call dein#add('shaunsingh/solarized.nvim')
-
-"  call dein#add('Shougo/deoplete.nvim')
-"  call dein#add('Shougo/context_filetype.vim')
-"  call dein#add('Shougo/neopairs.vim')
-"  call dein#add('Shougo/echodoc.vim')
-"  call dein#add('Shougo/neoinclude.vim')
-"  call dein#add('Shougo/neosnippet.vim')
-"  call dein#add('Shougo/neosnippet-snippets')
-"  call dein#add('tweekmonster/deoplete-clang2')
-"  call dein#add('zchee/deoplete-jedi')
-"  call dein#add('deathlyfrantic/deoplete-spell')
-"  call dein#add('wokalski/autocomplete-flow')
-"  call dein#add('jiangmiao/auto-pairs')
-"  call dein#add('ervandew/supertab')
-"  call dein#add('sebastianmarkow/deoplete-rust', { 'on_ft': 'rust'})
-
-  call dein#add('neoclide/coc.nvim', {'rev' : 'release'})
-
-  call dein#add('tpope/vim-sleuth')
-
-  call dein#add('tpope/vim-surround')
-
-  call dein#add('tpope/vim-obsession')
-
-  " call dein#add('w0rp/ale')
-
-"  call dein#add('autozimu/LanguageClient-neovim', {
-"        \ 'rev': 'next',
-"        \ 'build': 'bash install.sh',
-"        \ })
-
-  call dein#add('vim-airline/vim-airline')
-  call dein#add('vim-airline/vim-airline-themes')
-  call dein#add('qpkorr/vim-bufkill')
-  call dein#add('farmergreg/vim-lastplace')
-  call dein#add('edkolev/tmuxline.vim')
-  call dein#add('github/copilot.vim')
-
-  call dein#add('tpope/vim-repeat')
-  call dein#add('ggandor/lightspeed.nvim')
-
-  " Required:
-  call dein#end()
-  call dein#save_state()
-endif
-" Required:
-filetype plugin indent on
-syntax enable
-
-" If you want to install not installed plugins on startup.
-if dein#check_install()
-  call dein#install()
-endif
-
-"End dein Scripts-------------------------
-
-if dein#tap('denite.nvim')
-  " Define mappings
-  autocmd FileType denite call s:denite_my_settings()
-  function! s:denite_my_settings() abort
-    nnoremap <silent><buffer><expr> <CR>
-          \ denite#do_map('do_action')
-    nnoremap <silent><buffer><expr> d
-          \ denite#do_map('do_action', 'delete')
-    nnoremap <silent><buffer><expr> p
-          \ denite#do_map('do_action', 'preview')
-    nnoremap <silent><buffer><expr> q
-          \ denite#do_map('quit')
-    nnoremap <silent><buffer><expr> i
-          \ denite#do_map('open_filter_buffer')
-    nnoremap <silent><buffer><expr> <Space>
-          \ denite#do_map('toggle_select').'j'
-  endfunction
-
-  autocmd FileType denite-filter call s:denite_filter_my_settings()
-  function! s:denite_filter_my_settings() abort
-    inoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-    " call deoplete#custom#buffer_option('auto_complete', v:false)
-    imap <silent><buffer> <C-c> <Plug>(denite_filter_quit)
-    inoremap <silent><buffer> <Down>
-          \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
-    inoremap <silent><buffer> <Up>
-          \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
-  endfunction
-
-  call denite#custom#option('_', {
-        \ 'start_filter': v:true,
-        \ 'prompt': 'λ:',
-        \ 'empty': v:false,
-        \ 'source_names': 'short',
-        \ 'vertical_preview': 1,
-        \ 'auto_resume': v:true,
-        \ 'split': "floating",
-        \ 'immediately_1': v:true,
-        \ 'statusline': v:false,
-        \ 'highlight_window_background': "Normal",
-        \ })
-
-  call denite#custom#alias('source', 'file/rec/git', 'file/rec')
-
-  call denite#custom#var('file/rec/git', 'command',
-        \ ['git', 'ls-files', '-co', '--exclude-standard', '--cached', '--others'])
-
-
-  let g:fruzzy#usenative = 1
-  call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
-
-  call denite#custom#source('file/rec', 'sorters', ['sorter/sublime'])
-  call denite#custom#source('file/rec/git', 'sorters', ['sorter/sublime'])
-
-  " FIND and GREP COMMANDS
-  if executable('rg')
-    call denite#custom#var('file_rec', 'command',
-          \ ['rg', '--files'])
-
-    call denite#custom#var('grep', 'command', ['rg'])
-    call denite#custom#var('grep', 'default_opts',
-          \ ['--vimgrep', '--no-heading'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-  elseif executable('pt')
-    call denite#custom#var('file/rec', 'command',
-          \ ['pt', '--follow', '--nocolor', '--nogroup',
-          \  (has('win32') ? '-g:' : '-g='), ''])
-
-    call denite#custom#var('grep', 'command', ['pt'])
-    call denite#custom#var('grep', 'default_opts',
-          \ ['--nogroup', '--nocolor', '--smart-case'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', [])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-
-  elseif executable('ag')
-    " The Silver Searcher
-    call denite#custom#var('file/rec', 'command',
-          \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
-    call denite#custom#var('grep', 'command', ['ag'])
-    call denite#custom#var('grep', 'default_opts',
-          \ ['-i', '--vimgrep'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', [])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-  elseif executable('ack')
-    call denite#custom#var('grep', 'command', ['ack'])
-    call denite#custom#var('grep', 'default_opts',
-          \ ['--ackrc', $HOME.'/.ackrc', '-H',
-          \  '--nopager', '--nocolor', '--nogroup', '--column'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', ['--match'])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-  endif
-
-"  call denite#custom#map(
-"        \ 'insert',
-"        \ '<Down>',
-"        \ '<denite:move_to_next_line>',
-"        \ 'noremap'
-"        \)
-"  call denite#custom#map(
-"        \ 'insert',
-"        \ '<Up>',
-"        \ '<denite:move_to_previous_line>',
-"        \ 'noremap'
-"        \)
-
-  nnoremap <silent><leader>t :<C-u>Denite
-        \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-
-  nnoremap <silent><leader>ts :<C-u>Denite -default-action=split
-        \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-
-  nnoremap <silent><leader>tv :<C-u>Denite -default-action=vsplit
-        \ `finddir('.git', ';') != '' ? 'file/rec/git' : 'file/rec'`<CR>
-
-  nnoremap <silent><leader>g :<C-u>Denite grep<CR>
-
-  nnoremap <silent><leader>b :<C-u>Denite buffer<CR>
-  nnoremap <silent><leader>bs :<C-u>Denite -default-action=split buffer<CR>
-  nnoremap <silent><leader>bv :<C-u>Denite -default-action=vsplit buffer<CR>
-
-  if dein#tap('neomru.vim')
-    nnoremap <silent><leader>r :<C-u>Denite -buffer-name=files file_mru<CR>
-    nnoremap <silent><leader>rs :<C-u>Denite -buffer-name=files -default-action=split file_mru<CR>
-    nnoremap <silent><leader>rv :<C-u>Denite -buffer-name=files -default-action=vsplit file_mru<CR>
-  endif
-
-  nnoremap <silent><leader>j  :<C-u>Denite -resume -cursor-pos=+1 -immediately<CR>
-  nnoremap <silent><leader>k  :<C-u>Denite -resume -cursor-pos=-1 -immediately<CR>
-
-endif
-
-if dein#tap('NeoSolarized')
-  colorscheme NeoSolarized
-  set background=light
-endif
-
-if dein#tap('vim-solarized8')
-  set background=light
-  colorscheme solarized8
-endif
-
-if dein#tap('solarized')
-  set background=light
-  colorscheme solarized
-endif
-
-if dein#tap('deoplete.nvim')
-  let g:deoplete#enable_at_startup = 1
-  set completeopt-=preview
-  let g:neosnippet#enable_completed_snippet = 1
-  let g:echodoc_enable_at_startup = 1
-
-  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-  " SuperTab like snippets' behavior.
-  " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-  imap <expr><TAB>
-        \ pumvisible() ? "\<C-n>" :
-        \ neosnippet#expandable_or_jumpable() ?
-        \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-        \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-  " For conceal markers.
-  "if has('conceal')
-  "  set conceallevel=2 concealcursor=niv
-  "endif
-
-  " Expand the completed snippet trigger by <CR>.
-  imap <expr><CR>
-        \ (pumvisible() && neosnippet#expandable()) ?
-        \ "\<Plug>(neosnippet_expand)" : "\<CR>"
-endif
-
-if dein#tap('ale')
-  let g:ale_linters = {
-        \   'javascript': ['eslint', 'flow'],
-        \   'kotlin' : ['ktlint'],
-        \}
-  "kotlinc is broken for me
-  let g:ale_kotlin_kotlinc_enable_config = 1
-  let g:ale_kotlin_kotlinc_options = '-jvm-target 1.8 -d ~/tmp'
-  "let g:ale_kotlin_languageserver_executable = '/Users/casret/git/KotlinLanguageServer/build/install/kotlin-language-server/bin/kotlin-language-server'
-  let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-
-endif
-
-if dein#tap('deoplete-rust')
-  let g:deoplete#sources#rust#racer_binary= system('which racer')[:-2]
-  let g:deoplete#sources#rust#rust_source_path=system('rustc --print sysroot')[:-2] . '/lib/rustlib/src/rust/src'
-endif
-
-if dein#tap('LanguageClient-neovim')
-let g:LanguageClient_serverCommands = {
-      \ 'javascript': ['npx', 'javascript-typescript-stdio'],
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ }
-"    \ 'kotlin': ['/Users/casret/git/KotlinLanguageServer/server/build/install/server/bin/server'],
-endif
-
-if dein#tap('coc.nvim')
 " COC config
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" Remap keys for gotos
+" GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    call feedkeys('K', 'in')
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
+" Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Remap for rename current word
-nmap <localleader>rn <Plug>(coc-rename)
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Run the Code Lens action on the current line.
+nmap <leader>cl  <Plug>(coc-codelens-action)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocActionAsync('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+nnoremap <silent><leader>t :<C-u>CocList files<CR>
+nnoremap <silent><leader>g :<C-u>CocList grep<CR>
+nnoremap <silent><leader>b :<C-u>CocList buffers<CR>
+nnoremap <silent><leader>r :<C-u>CocList mru<CR>
 
 let g:airline#extensions#coc#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -361,49 +157,11 @@ let g:tmuxline_preset = 'nightly_fox'
 
 set updatetime=300
 set cmdheight=2
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
+let g:coc_global_extensions = ['coc-json', 'coc-pyright', 'coc-tsserver', 'coc-highlight', 'coc-eslint', 'coc-lists', 'coc-lua', 'coc-solargraph']
 
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Create mappings for function text object, requires document symbols feature of languageserver.
-
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-  nnoremap <silent><leader>t :<C-u>CocList files<CR>
-  nnoremap <silent><leader>g :<C-u>CocList grep<CR>
-  nnoremap <silent><leader>b :<C-u>CocList buffers<CR>
-  nnoremap <silent><leader>r :<C-u>CocList mru<CR>
-
-  nnoremap <silent><leader>j  :<C-u>CocNext<CR>
-  nnoremap <silent><leader>k  :<C-u>CocPrev<CR>
-
-let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-tsserver', 'coc-highlight', 'coc-eslint', 'coc-vetur', 'coc-lists', 'coc-lua', 'coc-solargraph']
-endif
 highlight CocListFgWhite guibg=#002b36
 " Coc
-
-
-
 
 "set tabstop=2
 "set shiftwidth=2
@@ -423,7 +181,6 @@ nnoremap <silent> <A-right> :bn<CR>
 nnoremap <silent> <A-left> :bp<CR>
 nnoremap Q <Nop>
 
-"set termguicolors
 set nofoldenable
 set dir=~/tmp
 set top
@@ -437,10 +194,12 @@ set formatoptions=tcroqj
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:vim_json_syntax_conceal = 0
 
-nnoremap <C-space> a
-imap <C-space> <Esc>
+"nnoremap <C-space> a
+"imap <C-space> <Esc>
 
-nnoremap <C-@> a
-imap <C-@> <Esc>
+"nnoremap <C-@> a
+"imap <C-@> <Esc>
 
 unmap Y
+
+lua require('config')

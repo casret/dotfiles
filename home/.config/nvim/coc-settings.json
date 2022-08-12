@@ -5,11 +5,10 @@
   "coc.preferences.extensionUpdateCheck": "daily",
   "javascript.suggestionActions.enabled": false,
   "eslint.autoFixOnSave": true,
-  "python.jediEnabled": false,
   "solargraph.diagnostics": true,
   "tsserver.trace.server": "messages",
-  "solargraph.autoformat": true,
-  "solargraph.formatting": false,
+  "solargraph.autoformat": false,
+  "solargraph.formatting": true,
   "solargraph.completion": true,
   "solargraph.hover": true,
   "list.source.grep.useLiteral": false,
@@ -25,6 +24,7 @@
   "Lua.runtime.version": "Lua 5.1",
   "Lua.diagnostics.globals": ["ARGV", "KEYS", "redis"],
 	"list.source.symbols.defaultOptions": ["--interactive", "--number-select"],
-  "prettier.disableLanguages": []
+  "prettier.disableLanguages": [],
+  "python.formatting.provider": "black"
 }
 
