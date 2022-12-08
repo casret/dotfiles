@@ -1,0 +1,13 @@
+nodejs 14.15.5
+python 2.7.15
+kubectl 1.20.2
+kubetail 1.6.12
+ruby 2.6.1
+golang 1.15.6
+pnpm 6.21.0
+eksctl 0.67.0
+
+redis 6.2.6
+helm 3.7.2
+cmake 3.19.5
+protoc 21.7
