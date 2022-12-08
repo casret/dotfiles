@@ -188,8 +188,11 @@ set hidden
 set autowrite
 
 set noshowmode
-set clipboard+=unnamedplus "copy and paste to the system clipboard
+" win32yank slow as hell
+let g:clipboard = {  'name': 'WslClipboard', 'copy': {  '+': 'clip.exe',  '*': 'clip.exe',  },  'paste': {  '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',  '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',  },  'cache_enabled': 0,  }
+set clipboard+=unnamedplus "copy and paste to the system clipboard (win32yank is messed up)
 set formatoptions=tcroqj
+
 
 autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 let g:vim_json_syntax_conceal = 0

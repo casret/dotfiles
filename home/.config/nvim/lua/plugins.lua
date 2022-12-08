@@ -18,7 +18,6 @@ return require('packer').startup(function()
   use 'qpkorr/vim-bufkill'
   use 'farmergreg/vim-lastplace'
   use 'edkolev/tmuxline.vim'
-  use 'github/copilot.vim'
   use 'tpope/vim-repeat'
   use 'ggandor/lightspeed.nvim'
 
@@ -29,4 +28,16 @@ return require('packer').startup(function()
       {"nvim-treesitter/nvim-treesitter"}
     }
   }
+
+  --use {
+  --  "zbirenbaum/copilot.lua",
+  --  event = "VimEnter",
+  --  config = function()
+  --    vim.defer_fn(function()
+  --      require("copilot").setup()
+  --    end, 100)
+  --  end,
+  --}
+  
+  use 'github/copilot.vim'
 end)
