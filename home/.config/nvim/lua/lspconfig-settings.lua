@@ -1,6 +1,8 @@
 require("mason").setup()
+-- have to manually install solagraph, otherwise get bundle errors
 require("mason-lspconfig").setup({
-    automatic_installation = true})
+    automatic_installation = {exclude = {"solargraph"}},
+})
 require("lsp-format").setup {}
 
 -- Mappings.
@@ -69,23 +71,8 @@ require("lspconfig").kotlin_language_server.setup({
 })
 
 require("lspconfig").solargraph.setup({
-	on_attach = function() 
-            on_attach()
-            require("lsp-format").on_attach()
+	on_attach = function(client, bufnr) 
+            on_attach(client, bufnr)
+            require("lsp-format").on_attach(client, bufnr)
         end,
-        init_options = { formatting = true }
 })
-
-require "lspconfig".efm.setup {
-    on_attach = require("lsp-format").on_attach,
-    init_options = {documentFormatting = true},
-    filetypes = {"lua"},
-    settings = {
-        rootMarkers = {".git/"},
-        languages = {
-            lua = {
-                {formatCommand = "lua-format -i", formatStdin = true}
-            },
-        }
-    }
-}

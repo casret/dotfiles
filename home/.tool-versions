@@ -3,7 +3,7 @@ python 2.7.15
 kubectl 1.20.2
 kubetail 1.6.12
 ruby 2.6.1
-golang 1.15.6
+golang 1.19.4
 pnpm 6.21.0
 eksctl 0.67.0
 
