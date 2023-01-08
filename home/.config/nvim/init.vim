@@ -1,13 +1,21 @@
 lua require('plugins')
 lua require('mappings')
 lua require('options')
-lua require("lspconfig-settings")
-lua require('telescope-settings')
-lua require('treesitter-settings')
-lua require('lualine-settings')
-lua require('lspkind-settings')
-lua require('cmp-settings')
 
+let g:clipboard = {
+                        \   'name': 'win32yank-wsl',
+                        \   'copy': {
+                        \      '+': 'win32yank.exe -i --crlf',
+                        \      '*': 'win32yank.exe -i --crlf',
+                        \    },
+                        \   'paste': {
+                        \      '+': 'win32yank.exe -o --lf',
+                        \      '*': 'win32yank.exe -o --lf',
+                        \   },
+                        \   'cache_enabled': 0,
+                        \ }
+" when win32yank slow as hell
+"let g:clipboard = {  'name': 'WslClipboard', 'copy': {  '+': 'clip.exe',  '*': 'clip.exe',  },  'paste': {  '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',  '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',  },  'cache_enabled': 0,  }
 " let g:polyglot_disabled = ['jsx']
 " In case we do end up wanting jsx
 "let g:jsx_ext_required = 1
@@ -28,8 +36,6 @@ lua require('cmp-settings')
 "nnoremap <silent> <A-right> :bn<CR>
 "nnoremap <silent> <A-left> :bp<CR>
 "nnoremap Q <Nop>
-" when win32yank slow as hell
-let g:clipboard = {  'name': 'WslClipboard', 'copy': {  '+': 'clip.exe',  '*': 'clip.exe',  },  'paste': {  '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',  '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',  },  'cache_enabled': 0,  }
 
 "autocmd FileType c,cpp,java,php,javascript,vue,python autocmd BufWritePre <buffer> %s/\s\+$//e
 

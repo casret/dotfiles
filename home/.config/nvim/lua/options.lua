@@ -13,8 +13,9 @@ opt.top = true
 opt.hidden = true
 opt.autowrite = true
 opt.showmode = false
-opt.clipboard = "unnamedplus"
+-- opt.clipboard = "unnamedplus"
 opt.formatoptions = "tcroqj"
+opt.title = true
 
 vim.g.vim_json_syntax_conceal = 0
 

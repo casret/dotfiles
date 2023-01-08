@@ -13,12 +13,20 @@ return require('packer').startup(function()
     requires = { {'nvim-lua/plenary.nvim'},
       {'nvim-telescope/telescope-fzy-native.nvim'} }
   }
+  use {
+    "nvim-telescope/telescope-frecency.nvim",
+    config = function()
+      require"telescope".load_extension("frecency")
+    end,
+    requires = {"kkharji/sqlite.lua"}
+  }
 
   use({
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
-    })
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  })
 
+  -- maybe look into https://github.com/VonHeikemen/lsp-zero.nvim
   use {
     'neovim/nvim-lspconfig',
     requires = { {"lukas-reineke/lsp-format.nvim"}}
@@ -27,83 +35,92 @@ return require('packer').startup(function()
   use 'jose-elias-alvarez/typescript.nvim'
 
   use({
-      "hoob3rt/lualine.nvim",
-      requires = { "kyazdani42/nvim-web-devicons", opt = true },
-    })
+    "hoob3rt/lualine.nvim",
+    requires = { "kyazdani42/nvim-web-devicons" },
+  })
 
-use {
-  "zbirenbaum/copilot.lua",
-  event = "VimEnter",
-  config = function()
-    vim.defer_fn(function()
-      require("copilot").setup({
-      suggestion = {
-	auto_trigger = true,
-        keymap = {
-          accept = "<C-Space>",
-        },
-      }
-      })
-    end, 100)
-  end,
-}
-use {
-  "zbirenbaum/copilot-cmp",
-  after = { "copilot.lua" },
-  config = function ()
-    require("copilot_cmp").setup()
-  end
-}
+  use {
+    "zbirenbaum/copilot.lua",
+--    event = "VimEnter",
+    config = function()
+      --vim.defer_fn(function()
+        require("copilot").setup({
+          suggestion = {
+            enabled = false,
+          },
+          panel = {
+            enabled = false,
+          },
+        })
+      --end, 100)
+    end,
+  }
+  use {
+    "zbirenbaum/copilot-cmp",
+    after = "copilot.lua",
+    --event = "InsertEnter",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
+  }
+
   use({
-      "hrsh7th/nvim-cmp",
-      requires = {
-        { "hrsh7th/cmp-nvim-lsp" },
-        { "hrsh7th/cmp-nvim-lua" },
-        { "hrsh7th/cmp-buffer" },
-        { "hrsh7th/cmp-path" },
-        { "hrsh7th/cmp-cmdline" }
-      }})
+    "hrsh7th/nvim-cmp",
+    requires = {
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-path" },
+      { "hrsh7th/cmp-cmdline" },
+      { 'hrsh7th/cmp-vsnip' },
+      { 'hrsh7th/vim-vsnip' }
+    }})
 
+    use 'tpope/vim-sleuth'
+    use 'tpope/vim-surround'
+
+    use 'onsails/lspkind-nvim'
+    use("mhartington/formatter.nvim")
     use({
-      "L3MON4D3/LuaSnip",
-      requires = {
-        "rafamadriz/friendly-snippets",
-      },
-    })
-
-  use 'tpope/vim-sleuth'
-  use 'tpope/vim-surround'
-
-  use 'onsails/lspkind-nvim'
-  use("mhartington/formatter.nvim")
-     use({
       "weilbith/nvim-code-action-menu",
       cmd = "CodeActionMenu",
     })
 
-  use { "williamboman/mason.nvim" }
-  use { "williamboman/mason-lspconfig.nvim" }
+    use { "williamboman/mason.nvim" }
+    use { "williamboman/mason-lspconfig.nvim" }
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
+    use('mbbill/undotree')
+    use('ethanholz/nvim-lastplace')
 
+    -- use 'edkolev/tmuxline.vim'
+    -- use 'sheerun/vim-polyglot'  
+    --use {'neoclide/coc.nvim', branch = 'release'}
+    --use 'tpope/vim-obsession'
 
-  -- use 'edkolev/tmuxline.vim'
-  -- use 'sheerun/vim-polyglot'  
-  --use {'neoclide/coc.nvim', branch = 'release'}
-  --use 'tpope/vim-obsession'
+    --use 'vim-airline/vim-airline'
+    --use 'vim-airline/vim-airline-themes'
+    --use 'qpkorr/vim-bufkill'
+    --use 'farmergreg/vim-lastplace'
+    --use 'tpope/vim-repeat'
+    --use 'ggandor/lightspeed.nvim'
 
-  --use 'vim-airline/vim-airline'
-  --use 'vim-airline/vim-airline-themes'
-  --use 'qpkorr/vim-bufkill'
-  --use 'farmergreg/vim-lastplace'
-  --use 'tpope/vim-repeat'
-  --use 'ggandor/lightspeed.nvim'
+    --use {
+      --  "ThePrimeagen/refactoring.nvim",
+      --  requires = {
+        --    {"nvim-lua/plenary.nvim"},
+        --    {"nvim-treesitter/nvim-treesitter"}
+        --  }
+        -- }
 
-  --use {
-  --  "ThePrimeagen/refactoring.nvim",
-  --  requires = {
-  --    {"nvim-lua/plenary.nvim"},
-  --    {"nvim-treesitter/nvim-treesitter"}
-  --  }
- -- }
-
-  --use 'github/copilot.vim'
-end)
+        --use 'github/copilot.vim'
+      end)

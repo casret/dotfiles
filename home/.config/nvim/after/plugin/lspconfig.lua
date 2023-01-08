@@ -44,35 +44,44 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
+
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 require("typescript").setup({
     server = { -- pass options to lspconfig's setup method
         on_attach = on_attach,
+        capabilities = capabilities,
     },
 })
 
 require('rust-tools').setup{
     server = {
 	on_attach = on_attach,
+        capabilities = capabilities,
     }
 }
 
 require("lspconfig").volar.setup({
     on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 require("lspconfig").eslint.setup({
     on_attach = on_attach,
+    capabilities = capabilities,
 })
 
-vim.cmd([[autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll]])
+vim.cmd([[autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js,*.mjs EslintFixAll]])
 
 require("lspconfig").kotlin_language_server.setup({
     on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 require("lspconfig").solargraph.setup({
-	on_attach = function(client, bufnr) 
-            on_attach(client, bufnr)
-            require("lsp-format").on_attach(client, bufnr)
-        end,
+    capabilities = capabilities,
+    on_attach = function(client, bufnr) 
+        on_attach(client, bufnr)
+        require("lsp-format").on_attach(client, bufnr)
+    end,
 })
