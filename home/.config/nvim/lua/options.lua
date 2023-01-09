@@ -19,5 +19,17 @@ opt.title = true
 
 vim.g.vim_json_syntax_conceal = 0
 
-vim.cmd("colorscheme solarized")
 vim.cmd("unmap Y")
+
+vim.g.clipboard = {
+	name = 'win32yank-wsl',
+	copy = {
+		["+"] = 'win32yank.exe -i --crlf',
+		["*"] = 'win32yank.exe -i --crlf',
+	},
+	paste = {
+		["+"] = 'win32yank.exe -o --lf',
+		["*"] = 'win32yank.exe -o --lf',
+	},
+	cache_enabled = 0,
+}

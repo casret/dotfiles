@@ -1,4 +1,8 @@
-require("lualine").setup {
+return {
+  "hoob3rt/lualine.nvim",
+  lazy = false,
+  dependencies = { "kyazdani42/nvim-web-devicons" },
+  opts = {
   sections = {
     lualine_c = {
       {
@@ -8,4 +12,8 @@ require("lualine").setup {
       }
     }
   }
+},
+	config = true,
+
+
 }
