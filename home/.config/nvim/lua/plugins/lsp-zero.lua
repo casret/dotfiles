@@ -1,7 +1,14 @@
+-- copilot version https://github.com/zbirenbaum/copilot-cmp
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+
 return {
   {
-  event = "BufReadPre",
-  'VonHeikemen/lsp-zero.nvim',
+    event = "BufReadPre",
+    'VonHeikemen/lsp-zero.nvim',
     dependencies = {
       -- LSP Support
       {'neovim/nvim-lspconfig'},
@@ -21,18 +28,53 @@ return {
       {'L3MON4D3/LuaSnip'},
       -- Snippet Collection (Optional)
       {'rafamadriz/friendly-snippets'},
+      { "zbirenbaum/copilot-cmp" },
     },
-  config = function(plugin, opts)
-    vim.opt.signcolumn = 'yes'
-    local lsp = require('lsp-zero')
-    local lspkind = require('lspkind')
+    config = function(plugin, opts)
+      vim.opt.signcolumn = 'yes'
+      local lsp = require('lsp-zero')
+      lsp.preset('recommended')
+      local lspkind = require('lspkind')
+      local cmp = require'cmp'
 
-    lsp.setup_nvim_cmp({
+      local cmp_mappings = lsp.defaults.cmp_mappings({
+        ["<C-Space>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            local entry = cmp.get_selected_entry()
+            if not entry then
+              cmp.select_next_item()
+            else
+              cmp.confirm()
+            end
+          else
+            fallback()
+          end
+        end, {"i", "s", "c"}),
+        ["<CR>"] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = false,
+        }),
+        ["<Tab>"] = vim.schedule_wrap(function(fallback)
+          if cmp.visible() and has_words_before() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+          else
+            fallback()
+          end
+        end),
+      })
+
+      lsp.setup_nvim_cmp({
+        mapping = cmp_mappings,
+        sources = {
+          { name = "copilot" },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer" },
+          { name = "path" },
+        },
         formatting = {
           format = lspkind.cmp_format({
             mode = 'symbol', -- show only symbol annotations
-            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-            ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
             symbol_map = {
               Copilot = "",
             }
@@ -40,7 +82,6 @@ return {
         }
       })
 
-      lsp.preset('recommended')
       lsp.configure('solargraph', {
         force_setup = true
       })
