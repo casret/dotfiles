@@ -1,0 +1,25 @@
+  -- maybe look into https://github.com/VonHeikemen/lsp-zero.nvim
+  use {
+    'neovim/nvim-lspconfig',
+    requires = { {"lukas-reineke/lsp-format.nvim"}}
+  }
+  use 'simrat39/rust-tools.nvim'
+  use 'jose-elias-alvarez/typescript.nvim'
+
+    use("mhartington/formatter.nvim")
+    use({
+      "weilbith/nvim-code-action-menu",
+      cmd = "CodeActionMenu",
+    })
+
+    use {
+      "folke/trouble.nvim",
+      requires = "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("trouble").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }

@@ -16,6 +16,11 @@ opt.showmode = false
 -- opt.clipboard = "unnamedplus"
 opt.formatoptions = "tcroqj"
 opt.title = true
+opt.titlestring = " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+opt.number = true
+opt.relativenumber = true
+vim.api.nvim_create_autocmd("DirChanged", {
+	command = 'let &titlestring = " " .. fnamemodify(getcwd(), ":t")'})
 
 vim.g.vim_json_syntax_conceal = 0
 
@@ -33,3 +38,6 @@ vim.g.clipboard = {
 	},
 	cache_enabled = 0,
 }
+
+
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"

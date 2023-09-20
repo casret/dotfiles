@@ -29,6 +29,11 @@ return {
       -- Snippet Collection (Optional)
       {'rafamadriz/friendly-snippets'},
       { "zbirenbaum/copilot-cmp" },
+      { {
+        'jay-babu/mason-null-ls.nvim',
+        dependencies = { "jose-elias-alvarez/null-ls.nvim",}
+      } },
+      { {"lewis6991/gitsigns.nvim", config = true} },
     },
     config = function(plugin, opts)
       vim.opt.signcolumn = 'yes'
@@ -82,11 +87,47 @@ return {
         }
       })
 
-      lsp.configure('solargraph', {
-        force_setup = true
-      })
+      -- fucking rubygem hell
+      --lsp.configure('solargraph', {
+      --  force_setup = true
+      --})
+      --lsp.configure('ruby_ls', {
+      --  force_setup = true
+      --})
+      --lsp.configure('syntax_tree', {
+      --  force_setup = true
+      --})
 
       lsp.setup()
+      vim.diagnostic.config({
+        virtual_text = true,
+      })
+      vim.cmd([[autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js,*.mjs EslintFixAll]])
+
+
+      local null_ls = require('null-ls')
+      local null_opts = lsp.build_options('null-ls', {})
+
+      null_ls.setup({
+        on_attach = function(client, bufnr)
+          null_opts.on_attach(client, bufnr)
+          ---
+          -- you can add other stuff here....
+          ---
+        end,
+        sources = {
+          null_ls.builtins.formatting.ktlint,
+          null_ls.builtins.diagnostics.standardrb,
+          null_ls.builtins.formatting.standardrb,
+          null_ls.builtins.code_actions.gitsigns
+        }
+      })
+
+      require("mason-null-ls").setup({
+        ensure_installed = nil,
+        automatic_installation = true,
+        automatic_setup = false,
+      })
     end
   }
 }
