@@ -8,3 +8,4 @@ nodejs 20.7.0
 kubectl 1.28.2
 fx 30.0.3
 chezmoi 2.40.0
+python 3.9.10

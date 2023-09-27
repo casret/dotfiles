@@ -130,17 +130,20 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End configuration added by Zim install
 
+source <(kubectl completion zsh)
 
 kd() {
-  k "$@" --context=dev
+  local args=("$@")
+  k "${args[@]:0:2}" --context=dev "${args[@]:2}"
 }
 
-compdef kd=k
+compdef _kubectl kd
 
 kp() {
-  k "$@" --context=prod
+  local args=("$@")
+  k "${args[@]:0:2}" --context=prod "${args[@]:2}"
 }
-compdef kp=k
+compdef _kubectl kp
 export EDITOR="vi"
 
 eval "$(direnv hook zsh)"
