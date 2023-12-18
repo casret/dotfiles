@@ -136,23 +136,25 @@ kd() {
   k "${args[@]:0:2}" --context=dev "${args[@]:2}"
 }
 
-compdef _kubectl kd
+compdef _k kd
 
 kp() {
   local args=("$@")
   k "${args[@]:0:2}" --context=prod "${args[@]:2}"
 }
-compdef _kubectl kp
+compdef _k kp
 export EDITOR="vi"
 
 kpf() {
   local args=("$@")
   k "${args[@]:0:2}" --context=prod-fg "${args[@]:2}"
 }
-compdef _kubectl kp
+compdef _k kpf
 export EDITOR="vi"
 
 eval "$(direnv hook zsh)"
 export LESS='-g -i -M -R -w -X -z-4 -j1'
 unsetopt SHARE_HISTORY
 setopt inc_append_history
+
+path+=(~/bin)
