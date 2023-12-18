@@ -9,3 +9,6 @@ kubectl 1.28.2
 fx 30.0.3
 chezmoi 2.40.0
 python 3.9.10
+awscli 2.12.7
+java corretto-21.0.1.12.1
+maven 3.9.6

@@ -4,6 +4,7 @@
 local opt = vim.opt
 opt.termguicolors = true
 opt.background = "light"
+opt.wrap = true
 vim.cmd("unmap Y")
 vim.g.clipboard = {
   name = "WslClipboard",
