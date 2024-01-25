@@ -7,16 +7,14 @@ return {
     },
     servers = {
       eslint = {},
-      kotlin_language_server = true,
-      -- disable for now
-      --        {
-      --        cmd = { "/home/casret/bin/kotlin-language-server" },
-      --
-      --        cmd_env = {
-      --          JAVA_HOME = jdk_home,
-      --          PATH = jdk_home .. "bin:" .. os.getenv("PATH"),
-      --        },
-      --      },
+      kotlin_language_server = {
+        cmd = { "/home/casret/bin/kotlin-language-server" },
+
+        --        cmd_env = {
+        --          JAVA_HOME = jdk_home,
+        --          PATH = jdk_home .. "bin:" .. os.getenv("PATH"),
+        --        },
+      },
     },
     setup = {
       eslint = function()
